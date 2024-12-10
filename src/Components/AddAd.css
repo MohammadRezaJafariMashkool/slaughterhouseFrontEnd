@@ -1,0 +1,75 @@
+.add-ad-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 750px;
+    margin-top: 100px;
+}
+.add-ad{
+    background-image: url('../Assets/AddAdBg.jpg');
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 600px;
+    margin-top: 110px;
+}
+.addadinput-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.addadinput-container h1{
+    color: white;
+}
+.adinputrow{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 33%;
+    gap: 50px;
+}
+.adinputrow input{
+  padding-right: 10px;
+  padding-left: 10px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  font-size: 16px;
+  height: 35px;
+}
+.long-input{
+    width: 100%;
+}
+::placeholder {color: #BA8375;opacity: 1; /* Firefox */}  
+::-ms-input-placeholder { /* Edge 12-18 */color: #BA8375;}
+
+.adinputrow button{
+    cursor: pointer;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    height: 35px;
+}
+@media (max-width:545px){ 
+    .add-ad-container{
+        width: 100vw;
+        height: 94vh;
+    }
+    .add-ad{
+        width: 100vw;
+        height: 94vh;
+    }    
+    .adinputrow{
+        flex-direction: column;
+    }
+    
+.adinputrow input{
+    width: 60vw;
+  }
+}

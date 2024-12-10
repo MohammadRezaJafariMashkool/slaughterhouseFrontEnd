@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "Light";
+  src: local("BYekan"),
+    url("./Assets/Fonts/BYekan.ttf") format("truetype");
+}
+*{
+  margin: 0;
+  font-family: "Light";
+}
+
+body {
+  background: #e9eaec;
+  margin: 0;
+   font-family: "Light";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+   font-family: "Light";/*source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace; */
+}
+
+.flxrow{display: flex;flex-direction: row;}
+.flxcln{display: flex;flex-direction: column;}
+
+.rtl{direction: rtl;}
+.ltr{direction: ltr;}
+
+.green{background: #BCE2CB;}
+.yellow{background: #FECAB3;}
+.lightpink{background: #FBAAB9;}
+.pink{background: #EF8696;}
+.brown{background: #85656E;}
+
+
+.red{background: #E60002;}
+.redGrad{background: white;}
+.crm{background: #BA8375;}
+.crml{background: #FFF4EE;}
+.brn{background: #281713;}
