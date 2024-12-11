@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import './HeaderNavbar.css';
 import siteIcon from '../Assets/LogoBigDark.png';
 import Cart from './CartModal';
+import Order from './OrdersModal';
+import Signin from './SigninModal';
+import Signup from './SignupModal';
 
 import productIcon from '../Assets/Icons/NavPrtDark.png';
 import adsIcon from '../Assets/Icons/NavAdsDark.png';
@@ -21,16 +24,24 @@ const HeaderNavbar = () => {
   const [cartCount, setCartCount] = useState(0);
 
   // State for modal visibility
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSighnUpModalOpen] = useState(false);
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
   // Handle navigation button click
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
   };
 
-  // Toggle modal visibility
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+  // Toggle Cart modal visibility
+  const toggleCartModal = () => {
+    setIsCartModalOpen(!isCartModalOpen);
+  };  
+  
+  // Toggle Cart modal visibility
+  const toggleUserModal = () => {
+    setIsCartModalOpen(!isCartModalOpen);
   };
 
   return (
@@ -60,15 +71,30 @@ const HeaderNavbar = () => {
             <a className={`nav-button ${selectedButton === 'about' ? 'redGrad nav-button' : 'nav-button'}`} onClick={() => handleButtonClick('about')} href="#about">
               <img src={aboutUsIcon} alt="" /><p>درباره ما</p>
               </a>
-            <div className="nav-button" onClick={toggleModal}><img src={CartIcon} alt=""/><p>سبد خرید ({cartCount})</p></div>
+            <div className="nav-button" onClick={toggleCartModal}><img src={CartIcon} alt=""/><p>سبد خرید ({cartCount})</p></div>
 
-            <div className="nav-button" onClick={toggleModal}><img src={UserIcon} alt=""/><p>ورود/ثبتنام</p></div>
+            <div className="nav-button" onClick={toggleUserModal}><img src={UserIcon} alt=""/><p>ورود/ثبتنام</p></div>
           </div>
         </div>
 
       {/* Open Shopping Cart */}
-      {isModalOpen && (
+      {isCartModalOpen && (
         <Cart/>
+      )}
+
+      {/* Open Shopping Cart */}
+      {isCartModalOpen && (
+        <Order/>
+      )}
+
+      {/* Open Shopping Cart */}
+      {isCartModalOpen && (
+        <Signin/>
+      )}
+      
+      {/* Open Shopping Cart */}
+      {isCartModalOpen && (
+        <Signup/>
       )}
     </div>
   );
