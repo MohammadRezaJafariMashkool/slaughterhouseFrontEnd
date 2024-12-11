@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './CartModal.css';
+import './OrdersModal.css';
 import CloseBtnIcon from '../Assets/cart_cross_icon.png';
-const CartModal = () => {
+const OrdersModal = () => {
   // State for shopping cart items count
   const [cartCount, setCartCount] = useState(0);
 
@@ -37,11 +37,11 @@ const CartModal = () => {
 
   return (
     <div
-      className="cartmodal"
+      className="OrdersModal"
       style={{ display: isModalOpen ? 'block' : 'none' }}
     >
-      <div className="cartmodal-overlay" onClick={closeModal}></div>
-      <div className="cartmodal-content">
+      <div className="OrdersModal-overlay" onClick={closeModal}></div>
+      <div className="OrdersModal-content">
         <h2>سبد خرید</h2>
 
         <div className="cartproducts-list-container">
@@ -149,10 +149,10 @@ const CartModal = () => {
           <p>مبلغ کل: {calculateTotal().toLocaleString()} تومان</p><div className="checkout-btn">تسویه حساب</div>
         </div>
 
-        <img src={CloseBtnIcon} className='cartmodal-close-btn' onClick={closeModal}></img>
+        <img src={CloseBtnIcon} className='OrdersModal-close-btn' onClick={closeModal}></img>
       </div>
     </div>
   );
 };
 
-export default CartModal;
+export default OrdersModal;

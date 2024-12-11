@@ -1,5 +1,5 @@
 /* Modal styling */
-.cartmodal {
+.OrdersModal {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     z-index: 1000;
   }
   
-  .cartmodal-overlay {
+  .OrdersModal-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -20,7 +20,7 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
   
-  .cartmodal-content {
+  .OrdersModal-content {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -37,10 +37,10 @@
     z-index: 1001;
   }
 
-  .cartmodal-content h2{
+  .OrdersModal-content h2{
     width: auto;
   }
-  .cartmodal-close-btn {
+  .OrdersModal-close-btn {
     position: absolute; /* Position the child relative to the parent */
     display: flex;
     flex-direction: column;
