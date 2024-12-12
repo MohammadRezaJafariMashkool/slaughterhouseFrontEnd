@@ -10,9 +10,9 @@ import NewsBar  from './Components/ModernUI/NewsBar';
 */
 
 
-import HeaderNavbar from './Components/HeaderNavbar';
-import PageHome  from './Components/PageHome';
-import Footer  from './Components/Footer'; 
+import HeaderNavbar from './Components/HeaderNavbar/HeaderNavbar';
+import PageHome  from './Components/PageHome/PageHome';
+import Footer  from './Components/Footer/Footer'; 
 
 function App() {
   
