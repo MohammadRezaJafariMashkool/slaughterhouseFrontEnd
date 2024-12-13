@@ -97,6 +97,7 @@ const Product = (props) => {
                 })}
           </div>
         </div>
+        
       </div>
       <button className="add-to-cart-butn" onClick={handleAddToCart}>اضافه به سبد</button>
     </div>

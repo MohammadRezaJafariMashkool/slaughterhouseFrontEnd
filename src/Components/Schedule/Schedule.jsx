@@ -5,6 +5,11 @@ import DatePicker from "react-multi-date-picker"
 import { Calendar } from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
+import { months } from 'moment-jalaali'
+
+// Selected Date shouldnt be more than 1 months
+// Selected date shouldnt be in normal holydays
+// Selected date shouldnt be in fully booked days holydays
 
 const Schedule = () => {
 

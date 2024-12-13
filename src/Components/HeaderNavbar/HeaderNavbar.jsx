@@ -22,10 +22,10 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleSignInModal, onToggleSignUpMo
   const [selectedButton, setSelectedButton] = useState('home');
 
   // Fetch cartItems from ShopContext
-  const { cartItems } = useContext(ShopContext);
+  const { getTotalCartItems } = useContext(ShopContext);
 
   // Calculate total cart count
-  const cartCount = Object.values(cartItems).reduce((total, count) => total + count, 0);
+  // const cartCount = Object.values(cartItems).reduce((total, count) => total + count, 0);
 
   // Handle navigation button click
   const handleButtonClick = (buttonName) => {
@@ -87,7 +87,7 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleSignInModal, onToggleSignUpMo
           </a>
           <div className="nav-button" onClick={onToggleCartModal}>
             <img src={CartIcon} alt="" />
-            <p>سبد خرید ({cartCount})</p>
+            <p>سبد خرید ({getTotalCartItems()})</p>
           </div>
 
           <div className="nav-button" onClick={onToggleSignUpModal}>

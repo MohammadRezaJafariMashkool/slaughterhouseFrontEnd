@@ -5,7 +5,7 @@ import {ShopContext} from '../../Context/ShopContext';
 
 const CartModal = () => {
 
-  const {AllProducts, cartItems, addToCart, removeFromCart} = useContext(ShopContext)
+  const {AllProducts, cartItems, addToCart, removeFromCart, getTotalCartAmount} = useContext(ShopContext)
 
   // State for modal visibility
   const [isModalOpen, setIsModalOpen] = useState(true); // Assuming it starts visible
@@ -108,7 +108,8 @@ const CartModal = () => {
 
         {/* Total */}
         <div className="total-container">
-          <p>مبلغ کل: {calculateTotal().toLocaleString()} تومان</p><div className="checkout-btn">تسویه حساب</div>
+          {/* <p>مبلغ کل: {calculateTotal().toLocaleString()} تومان</p><div className="checkout-btn">تسویه حساب</div> */}
+          <p>مبلغ کل: {getTotalCartAmount()} تومان</p><div className="checkout-btn">تسویه حساب</div>
         </div>
 
         <img src={CloseBtnIcon} className='cartmodal-close-btn' onClick={closeModal}></img>
