@@ -7,6 +7,7 @@ const Product = (props) => {
 
   // Get products from context
   const {AllProducts} = useContext(ShopContext);
+  const {addToCart} = useContext(ShopContext);
 
   // States for product quantities
   const [quantities, setQuantities] = useState(
@@ -14,21 +15,28 @@ const Product = (props) => {
   );
 
   // Handles input change
-  const handleInputChange = (index, value) => {
+  const handleInputChange = (id, value) => {
     const newQuantities = [...quantities];
-    newQuantities[index] = value ? parseInt(value) || 0 : 0; // Update quantity
+    newQuantities[id] = value ? parseInt(value) || 0 : 0; // Update quantity
     setQuantities(newQuantities);
   };
 
-  // Handles add to cart
   const handleAddToCart = () => {
-    const cartItems = quantities
-      .map((quantity, index) => (quantity > 0 ? { productIndex: index, quantity } : null))
-      .filter((item) => item !== null); // Filter out products with quantity 0
+    quantities.forEach((quantity, id) => {
+      if (quantity > 0) {
+        addToCart(id, quantity); // Add the specific quantity at once
+      }
+    });
+  
+    // Reset all quantities to 0
+    setQuantities(Array(quantities.length).fill(0));
+    
+    // Trigger the cart modal
+    props.onToggleCartModal();
 
-    console.log('Cart Items:', cartItems);
-    alert(`Items added to cart: ${JSON.stringify(cartItems)}`);
   };
+  
+  
 
   return (
     <div className="products-container">
@@ -52,7 +60,7 @@ const Product = (props) => {
                               <p className="product-name">{item.name}</p>
                               <p className="product-price">{item.new_price}</p>
                               <p className="product-price-sign">تومان مقدار:</p>                          
-                              <input className="product-amount-txb" type="number" defaultValue={0} onChange={(e) => handleInputChange(i, e.target.value)}/>
+                              <input className="product-amount-txb" type="number" defaultValue={0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
                               <p className="product-kilo">کیلو</p>
                             </div>
                         </div>
@@ -78,7 +86,7 @@ const Product = (props) => {
                                 <p className="product-name">{item.name}</p>
                                 <p className="product-price">{item.new_price}</p>
                                 <p className="product-price-sign">تومان مقدار:</p>                          
-                                <input className="product-amount-txb" type="number" defaultValue={0} onChange={(e) => handleInputChange(i, e.target.value)}/>
+                                <input className="product-amount-txb" type="number" defaultValue={0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
                                 <p className="product-kilo">کیلو</p>
                               </div>
                           </div>

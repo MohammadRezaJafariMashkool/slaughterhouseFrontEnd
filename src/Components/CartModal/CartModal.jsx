@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './CartModal.css';
 import CloseBtnIcon from '../../Assets/cart_cross_icon.png';
+import {ShopContext} from '../../Context/ShopContext';
+
 const CartModal = () => {
-  // State for shopping cart items count
-  const [cartCount, setCartCount] = useState(0);
+
+  const {AllProducts, cartItems, addToCart, removeFromCart} = useContext(ShopContext)
 
   // State for modal visibility
   const [isModalOpen, setIsModalOpen] = useState(true); // Assuming it starts visible
@@ -30,9 +32,13 @@ const CartModal = () => {
 
   // Calculate total price
   const calculateTotal = () => {
-    return quantities.reduce((total, quantity, index) => {
-      return total + (quantity * prices[index]); // Multiply price by quantity and add to total
-    }, 0);
+      let totalPrice = 0;
+      AllProducts.map((e)=>{
+        if(cartItems[e.id]>0){
+          totalPrice += e.new_price*cartItems[e.id]
+        }
+      })
+    return totalPrice
   };
 
   return (
@@ -44,104 +50,60 @@ const CartModal = () => {
       <div className="cartmodal-content">
         <h2>سبد خرید</h2>
 
-        <div className="cartproducts-list-container">
-          {/* First Table */}
+        <div className="products-list-container" id="productprice">
+        
+          {/* Cow Products Table */}
           <div className="products-list-small-card">
-            <div className="header-small-card-cart-prices">
+            <div className="header-small-card-prices">
               <p>گوشت گوساله</p>
             </div>
-            <div className="body-small-card-cart-prices">
-              <div className="cart-prices-right">
-                <div className="cart-prices-item-right"><p>ران گوساله</p></div>
-                <div className="cart-prices-item-right"><p>سردست گوساله</p></div>
-                <div className="cart-prices-item-right"><p>راسته گوساله</p></div>
-                <div className="cart-prices-item-right"><p>گردن گوساله</p></div>
-                <div className="cart-prices-item-right"><p>فیله گوساله</p></div>
-                <div className="cart-prices-item-right"><p>قلوه گاه گوساله</p></div>
-                <div className="cart-prices-item-right"><p>لاشه گوساله</p></div>
+              <div className="prices-table-body">
+                {AllProducts.map((item, i)=>{
+                  if(item.category === "Cow"){
+                    return <div  className="prices-item-container">
+                              <div key={i} className="prices-item">
+                                <img className="product-img" src={item.image} alt="" />
+                                <p className="product-name">{item.name}</p>
+                                <p className="product-price">{item.new_price}</p>
+                                <p className="product-price-sign">تومان مقدار:</p>                          
+                                <input className="product-amount-txb" type="number" defaultValue={cartItems[item.id]>0?cartItems[item.id]:0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
+                                <p className="product-kilo">کیلو</p>
+                              </div>   
+                          </div>
+                  }
+                  else{
+                    return null
+                  }
+                })}
               </div>
-              <div className="cart-prices-middle">
-                {prices.slice(0, 7).map((price, idx) => (
-                  <div key={idx} className="cart-prices-item-middle"><p>{price}</p><p>تومان</p></div>
-                ))}
-              </div>
-              <div className="cart-prices-left">
-                {quantities.slice(0, 7).map((quantity, idx) => (
-                  <div key={idx} className="cart-prices-item-left">
-                    <input
-                      className="product-amount-txb"
-                      type="number"
-                      value={quantity}
-                      onChange={(e) => {
-                        const value = Math.max(0, Math.min(999, Number(e.target.value))); // Restrict value between 0 and 999
-                        handleInputChange(idx, value);
-                      }}
-                      onKeyDown={(e) => {
-                        // Prevent invalid input
-                        if (
-                          e.key === '-' ||
-                          e.key === 'e' ||
-                          e.key === '.'
-                        ) {
-                          e.preventDefault();
-                        }
-                      }}
-                    />
-                    <p>کیلو</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
-          {/* Second Table */}
+          {/* Lamb Products Table */}
           <div className="products-list-small-card">
-            <div className="header-small-card-cart-prices">
+            <div className="header-small-card-prices">
               <p>گوشت گوسفند</p>
             </div>
-            <div className="body-small-card-cart-prices">
-              <div className="cart-prices-right">
-                <div className="cart-prices-item-right"><p>ران گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>سردست گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>راسته گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>گردن گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>فیله گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>قلوه گاه گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>لاشه گوسفند</p></div>
-              </div>
-              <div className="cart-prices-middle">
-                {prices.slice(7).map((price, idx) => (
-                  <div key={idx} className="cart-prices-item-middle"><p>{price}</p><p>تومان</p></div>
-                ))}
-              </div>
-              <div className="cart-prices-left">
-                {quantities.slice(7).map((quantity, idx) => (
-                  <div key={idx + 7} className="cart-prices-item-left">
-                    <input
-                      className="product-amount-txb"
-                      type="number"
-                      value={quantity}
-                      onChange={(e) => {
-                        const value = Math.max(0, Math.min(999, Number(e.target.value))); // Restrict value between 0 and 999
-                        handleInputChange(idx + 7, value);
-                      }}
-                      onKeyDown={(e) => {
-                        // Prevent invalid input
-                        if (
-                          e.key === '-' ||
-                          e.key === 'e' ||
-                          e.key === '.'
-                        ) {
-                          e.preventDefault();
-                        }
-                      }}
-                    />
-                    <p>کیلو</p>
-                  </div>
-                ))}
-              </div>
+            <div className="prices-table-body">
+              {AllProducts.map((item, i)=>{
+                    if(item.category === "Sheep"){
+                      return <div  className="prices-item-container">
+                                <div key={i} className="prices-item">
+                                  <img className="product-img" src={item.image} alt="" />
+                                  <p className="product-name">{item.name}</p>
+                                  <p className="product-price">{item.new_price}</p>
+                                  <p className="product-price-sign">تومان مقدار:</p>                          
+                                  <input className="product-amount-txb" type="number" defaultValue={cartItems[item.id]>0?cartItems[item.id]:0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
+                                  <p className="product-kilo">کیلو</p>
+                                </div>
+                            </div>
+                    }
+                    else{
+                      return null
+                    }
+                  })}
             </div>
           </div>
+        
         </div>
 
         {/* Total */}
