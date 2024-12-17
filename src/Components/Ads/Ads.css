@@ -12,7 +12,7 @@
     padding-left: 2%;
     padding-right: 2%;
     margin-top: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 .additem{
     display: flex;
@@ -22,13 +22,33 @@
     direction: ltr;
     height: 150px;
     border: 1px solid #281713;
-    border-radius: 10px;
     cursor: pointer;
+}
+.add-card-header{
+  background: #fefefe;
+  height: 14%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-card-body{
+  width: 100%;
+  height: 70%;
+  padding: 10px;
+  padding-left: 200px;
+}
+.add-card-footer{
+  background: #fefefe;
+  height: 14%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .adpic{
     width: 45%;    
     height: 100%;
-    border-radius: 10px;
 }
 .addetails{
     display: flex;
@@ -36,17 +56,8 @@
     direction: rtl;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 10px;
     width: 55%;
     height: 100%;
-}
-.addetails p{
-    height: 47%;    
-    overflow-y: hidden;  
-    overflow-x: hidden;  
-}
-.addetails h2 h3{
-    height: 24%;    
 }
 
 /* The Modal (background) */
@@ -75,7 +86,7 @@
     background-color: #fefefe;
     margin: auto;
     border: 3px solid #888;
-    border-radius: 30px;
+    border-radius: 8px;
 }
   
   /* The Close Button */
@@ -109,7 +120,7 @@
   }  
   .modal-item-image-container img{
     width: 100%;
-    border-radius: 20px;
+    border-radius: 8px;
   }
   .modal-item-detail-container{
     width: 40%;

@@ -1,12 +1,11 @@
-import React, {createContext, useEffect, useState} from "react"
-import {BackendUrl} from '../constants/userConstants';
-//import AllProducts from '../Assets/all_product'
+import React, {createContext, useState} from "react"
+import AllProducts from '../Assets/all_product'
 
 export const ShopContext = createContext(null);
 
 const getDefaultCart = ()=>{
     let cart = {};
-    for(let index = 0; index < 300+1; index++){
+    for(let index = 0; index < AllProducts.length+1; index++){
         cart[index] = 0;
     }
     return cart
@@ -14,29 +13,10 @@ const getDefaultCart = ()=>{
 
 const ShopContextProvider = (props)=>{
 
-    const [AllProducts, setAllProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
     const[cartItems, setCartItems] = useState(getDefaultCart())
-
-
-
-    useEffect(() => {
-        fetch(BackendUrl+'/allproducts')
-            .then((response) => response.json())
-            .then((data) => {
-                setAll_Product(data.products);
-                setLoading(false); // Set loading to false when data is loaded
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-                setLoading(false); // Set loading to false in case of an error
-            });
-    }, []);
-
-
-
-    //const addToCart = (itemId)=>{setCartItems((prev)=>({...prev, [itemId]:prev[itemId]+1}))}
-
+    // const addToCart = (itemId)=>{
+    //     setCartItems((prev)=>({...prev, [itemId]:prev[itemId]+1}))
+    // }
     const addToCart = (itemId, quantity = 1) => {
         setCartItems((prev) => ({
             ...prev,
@@ -72,16 +52,11 @@ const ShopContextProvider = (props)=>{
 
     
     const contextValue = {AllProducts, cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalCartItems};
-    
-    if (loading) {
-        return <div>Loading...</div>;
-    }
     return(
         <ShopContext.Provider value={contextValue}>
             {props.children}
         </ShopContext.Provider>
     )
-    
 }
 
 export default ShopContextProvider;

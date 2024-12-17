@@ -11,6 +11,8 @@ import { months } from 'moment-jalaali'
 // Selected date shouldnt be in normal holydays
 // Selected date shouldnt be in fully booked days holydays
 
+//in every serch in schedule, search should start from today(dont search for previous dats)
+
 const Schedule = () => {
 
   return (
@@ -18,6 +20,7 @@ const Schedule = () => {
             <div className="schedule-header"><h1>در این قسمت میتوانید زمانی را برای کشتار دام خود رزرو کنید:</h1></div>
             <div className="schedule-body">
                 <div className="inputs">
+                    <h3 className="vacation-list-title">رزرو وقت:</h3>
                     <p>نام و نام خانوادگی: </p>
                     <input type="text" />
                     <p>شماره تلفن</p>
@@ -29,6 +32,9 @@ const Schedule = () => {
                       <DatePicker className="red" calendar={persian} locale={persian_fa} calendarPosition="bottom-right" />
                       <button className='reserve-button'>رزور</button>
                     </div>
+                </div>
+                <div className="vacation-list-container">
+                  <h3 className="vacation-list-title">لیست تعطیلات و روز های کاملا رزرو شده 30 روز آینده:</h3>
                 </div>
                 <div className="calender">
                     <Calendar className="red" calendar={persian} locale={persian_fa}/>
