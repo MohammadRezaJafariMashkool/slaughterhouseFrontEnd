@@ -1,0 +1,83 @@
+.adminnavbar-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+.adminnavbar-user-profile-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+.navbarad{
+    direction: rtl;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 15px;
+    padding-right: 60px;
+    box-shadow: 0 1px 3px -2px #000;
+    margin-bottom: 1px;
+    background: white;
+    cursor: pointer;
+}
+.navbarad-logo{
+    width: 200px;
+}
+.nav-profile{
+    width: 75px;
+}
+.sidebar{
+    direction: rtl;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 250px;
+    height: 0px;
+    background: white;
+    padding-top: 30px;
+}
+.sidebar-item{
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    border-radius: 6px;
+    background: #f6f6f6;
+    gap: 20px;
+    cursor: pointer;
+}
+@media (max-width: 800px){
+    .navbarad{
+        padding-top: 15px;
+        padding-right: 30px;
+    }
+    .navbarad-logo{
+        width: 150px;
+    }
+    .nav-profile{
+        width: 60px;
+    }
+    .sidebar{
+        padding-bottom: 30px;
+        padding-right: 0;
+        flex-direction: row;
+        width: 100%;
+        max-width: none;
+        height: auto;
+        justify-content: center;
+    }
+    .sidebar-item{
+        padding-left: 20px;
+        margin: 0;
+    }
+}

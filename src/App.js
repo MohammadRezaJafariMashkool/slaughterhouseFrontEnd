@@ -1,24 +1,17 @@
+import { useState } from 'react';
 import './App.css';
 import './Assets/Fonts/BYekan.ttf';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-
-/* 
-// Modern UI
-import CenterSection from './Components/ModernUI/CenterSection';
-import ButtonBar  from './Components/ModernUI/ButtonBar';
-import NewsBar  from './Components/ModernUI/NewsBar'; 
-*/
-
 
 import HeaderNavbar from './Components/HeaderNavbar/HeaderNavbar';
 import PageHome  from './Components/PageHome/PageHome';
 import Footer  from './Components/Footer/Footer'; 
 
 import Cart from './Components/CartModal/CartModal';
-import Order from './Components/OrdersModal/OrdersModal';
+import Profile from './Components/ProfileModal/ProfileModal';
+import AdminProfile from './Components/AdminModal/AdminModal';
 import Signin from './Components/SigninModal/SigninModal';
 import Signup from './Components/SignupModal/SignupModal';
-import { useState } from 'react';
 
 function App() {
 
@@ -26,22 +19,30 @@ function App() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   // Handlers for toggling modals
   const toggleCartModal = () => setIsCartModalOpen((prev) => !prev);
   const toggleSignInModal = () => setIsSignInModalOpen((prev) => !prev);
   const toggleSignUpModal = () => setIsSignUpModalOpen((prev) => !prev);
-  const toggleOrderModal = () => setIsOrderModalOpen((prev) => !prev);
+  const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
+
+  // State for checking isAdmin
+  //const [adminState, setAdminState] = useState("noadmin")
+  const [adminState, setAdminState] = useState("admin")
+  
+  // Function to update the state
+  const updateState = (newValue) => {setAdminState(newValue);}
   
   return (
     <div className="main-container">
       <BrowserRouter>
         <HeaderNavbar
           onToggleCartModal={toggleCartModal}
+          onToggleProfileModal={toggleProfileModal}
           onToggleSignInModal={toggleSignInModal}
           onToggleSignUpModal={toggleSignUpModal}
-          onToggleOrderModal={toggleOrderModal}
+          onToggleOrderModal={toggleProfileModal}
         />
         <Routes>
           <Route path='/' element={<PageHome onToggleCartModal={toggleCartModal}/>}/>         
@@ -51,7 +52,7 @@ function App() {
 
         {/* Open Modals */}
           {isCartModalOpen && <Cart />}
-          {isOrderModalOpen && <Order />}
+          {isProfileModalOpen && (adminState === "noadmin"?<Profile/>:<AdminProfile/>)}
           {isSignInModalOpen && <Signin />}
           {isSignUpModalOpen && <Signup />}
       </div>

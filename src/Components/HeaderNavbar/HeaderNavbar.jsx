@@ -1,11 +1,7 @@
 import React, { useState, useContext } from 'react';
 import './HeaderNavbar.css';
-import { ShopContext } from '../../Context/ShopContext'; // Import your ShopContext
+import { ShopContext } from '../../Context/ShopContext'; 
 import siteIcon from '../../Assets/LogoBigDark.png';
-// import Cart from '../CartModal/CartModal';
-// import Order from '../OrdersModal/OrdersModal';
-// import Signin from '../SigninModal/SigninModal';
-// import Signup from '../SignupModal/SignupModal';
 
 import productIcon from '../../Assets/Icons/NavPrtDark.png';
 import adsIcon from '../../Assets/Icons/NavAdsDark.png';
@@ -17,15 +13,12 @@ import OffersIcon from '../../Assets/OffersIcon.png';
 import CartIcon from '../../Assets/Icons/ShopingCardDrak.png';
 import UserIcon from '../../Assets/Icons/UserIconDrak.png';
 
-const HeaderNavbar = ({ onToggleCartModal, onToggleSignInModal, onToggleSignUpModal, onToggleOrderModal }) => {
+const HeaderNavbar = ({ onToggleCartModal, onToggleProfileModal, onToggleSignInModal, onToggleSignUpModal, onToggleOrderModal }) => {
   // State for selected navigation button
   const [selectedButton, setSelectedButton] = useState('home');
 
   // Fetch cartItems from ShopContext
   const { getTotalCartItems } = useContext(ShopContext);
-
-  // Calculate total cart count
-  // const cartCount = Object.values(cartItems).reduce((total, count) => total + count, 0);
 
   // Handle navigation button click
   const handleButtonClick = (buttonName) => {
@@ -90,7 +83,7 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleSignInModal, onToggleSignUpMo
             <p>سبد خرید ({getTotalCartItems()})</p>
           </div>
 
-          <div className="nav-button" onClick={onToggleSignUpModal}>
+          <div className="nav-button" onClick={onToggleProfileModal}>
             <img src={UserIcon} alt="" />
             <p>ورود/ثبتنام</p>
           </div>

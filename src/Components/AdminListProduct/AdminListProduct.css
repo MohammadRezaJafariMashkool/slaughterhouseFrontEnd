@@ -1,0 +1,122 @@
+.list-product{
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    align-items: flex-start;
+    width: 95%;
+    height: 70vh;
+    padding-top: 10px;
+    padding-right: 50px;
+    margin: 30px;
+    border-radius: 6px;
+    background: white;
+}
+.listproduct-allproducts{
+    width: 100%;
+    overflow-y: auto;
+}
+.listproduct-format-main{
+    margin-right: 0;
+    font-weight: 500;
+    border: 2px solid black;
+    width: 94%;
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 0.5fr 0.5fr;
+    gap: 10px;
+    padding-right: 15px;
+    color: #454545;
+    font-size: 16px;
+}
+.listproduct-format{
+    align-items: center;
+    font-weight: 500;
+    border: 1px solid black;
+    width: 96%;
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 0.5fr 0.5fr;
+    gap: 10px;
+    padding-right: 0px;
+    color: #454545;
+    font-size: 16px;
+}
+.listproduct-format p{
+    margin-right: 20px;
+}
+.listproduct-producticon{
+    height: 80px;
+}
+.listproduct-remove-icon{
+    height: 40px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.form-button{
+    height: 40px;
+    width: 80px;
+    font-family: "light";
+}
+.form-input{
+    height: 40px;
+    width: 140px;
+    font-family: "light";
+}
+.product-img-and-btn{
+    gap: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+}
+.images-description{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #EBD1B7;
+}
+.image-list{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1px;
+}
+.image-list img{
+    height: 90px;
+    width: 56px;
+}
+.form-button-images{
+    background: #510b01;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    height: 40px;
+    font-family: "light";
+}
+
+@media(max-width:800px){
+    .list-product{
+        box-sizing: border-box;
+        width: 95%;
+        height: 100%;
+        padding-top: 10px;
+        padding-right: 30px;
+        margin: 20px;
+    }
+    .listproduct-format-main{
+        padding-top: 20px; 
+        padding-right: 5px;
+        font-size: 12px;
+    }
+}
+@media(max-width:500px){
+    .listproduct-format{
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './OrdersModal.css';
+//import './OrdersModal.css';
 import CloseBtnIcon from '../../Assets/cart_cross_icon.png';
 const OrdersModal = () => {
   // State for shopping cart items count

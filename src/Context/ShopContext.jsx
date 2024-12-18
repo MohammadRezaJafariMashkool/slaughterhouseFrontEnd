@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from "react"
-import {BackendUrl} from '../constants/userConstants';
+import {BackendUrl} from '../Constants/userConstants';
 //import AllProducts from '../Assets/all_product'
 
 export const ShopContext = createContext(null);
@@ -15,6 +15,7 @@ const getDefaultCart = ()=>{
 const ShopContextProvider = (props)=>{
 
     const [AllProducts, setAllProducts] = useState([]);
+    const [AllAds, setAllAds] = useState([]);
     const [loading, setLoading] = useState(true);
     const[cartItems, setCartItems] = useState(getDefaultCart())
 
@@ -24,7 +25,20 @@ const ShopContextProvider = (props)=>{
         fetch(BackendUrl+'/allproducts')
             .then((response) => response.json())
             .then((data) => {
-                setAll_Product(data.products);
+                setAllProducts(data.products);
+                setLoading(false); // Set loading to false when data is loaded
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+                setLoading(false); // Set loading to false in case of an error
+            });
+    }, []);
+
+    useEffect(() => {
+        fetch(BackendUrl+'/allads')
+            .then((response) => response.json())
+            .then((data) => {
+                setAllAds(data.products);
                 setLoading(false); // Set loading to false when data is loaded
             })
             .catch((error) => {

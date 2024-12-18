@@ -13,10 +13,7 @@ const CartModal = () => {
   // Close the modal
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-
-  // Prices of products (7 for each table)
-  const prices = Array(14).fill(1000000); // Replace with actual prices as needed
+  }; 
   
   // States for product quantities
   const [quantities, setQuantities] = useState(
@@ -28,17 +25,6 @@ const CartModal = () => {
     const newQuantities = [...quantities];
     newQuantities[index] = value ? parseInt(value) || 0 : 0; // Update quantity
     setQuantities(newQuantities);
-  };
-
-  // Calculate total price
-  const calculateTotal = () => {
-      let totalPrice = 0;
-      AllProducts.map((e)=>{
-        if(cartItems[e.id]>0){
-          totalPrice += e.new_price*cartItems[e.id]
-        }
-      })
-    return totalPrice
   };
 
   return (
