@@ -37,7 +37,11 @@
   height: 86%;
   padding: 10px;
   padding-left: 200px;
-  overflow-y: auto;
+  overflow-y:  hidden;
+}
+.add-card-body p{
+  width: 90%;
+    text-align: justify;
 }
 .adpic{
     width: 45%;    
@@ -131,5 +135,8 @@
   @media (max-width:545px){  
     .adslist{
       grid-template-columns: 1fr;
+    }
+    .add-card-body p{
+      width: 90%;
     }
 }
