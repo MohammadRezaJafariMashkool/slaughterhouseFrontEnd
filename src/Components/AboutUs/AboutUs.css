@@ -70,3 +70,16 @@
   height: 90%;
   cursor: pointer;
 }
+
+@media (max-width:1380px){    
+}
+@media (max-width:865px){ 
+}
+@media (max-width:653px){  
+}
+@media (max-width:545px){  
+  .aboutus-container{flex-direction: column; width: 100%; height: auto; gap: 15px;}
+  .aboutus-item-aboutus{width: 90%; height: 80vh; overflow-y: auto;}
+  .aboutus-item-contact{width: 90%; height: 80vh; overflow-y: auto;}
+  .aboutus-item-map-container{width: 90%; height: 80vh; overflow-y: auto;}
+}

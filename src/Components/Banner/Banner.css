@@ -11,12 +11,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 80%;
-    gap: 20px;
+    width: 90%;
+    gap: 10px;
 }
 .futures-item{
     margin-top: 20px;
-    margin-bottom: 20px;
     width: 25%;
     height: 400px;
     display: flex;
@@ -26,18 +25,19 @@
     border: 4px solid #808080;
     border-radius: 10px;
     cursor: pointer;
+    overflow-y: auto;
 }
 .futures-item h1{
     font-size: 20px;
     font-weight: 800;
     margin-right: 10px;
-    color: #000000;
+    color: #545151;
 }
 .futures-item p{
     font-size: 15px;
     margin-right: 10px;
     margin-left: 5px;
-    text-justify: newspaper;
+    text-align:justify;
     color: #000000;
 }
 
@@ -50,21 +50,37 @@
 }
 @media (max-width:545px){  
     .futures{
-        flex-direction: column;
-        width: 100vw;
-        gap: 20px;
-        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 3 columns of equal width */
+        gap: 10px; /* Spacing between the boxes */
+        max-width: 100%; /* Optional: Control the total width */
+        margin: 0 ; /* Center the container horizontally */
     }
     .futures-item{
-        margin-top: auto;
-        margin-bottom: auto;
-        width: 95vw;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        justify-content: flex-start;
         align-items: center;
-        justify-content: center;
-        border: 5px solid #BA8375;
+        border: 2px solid #bbb7b6;
+        border-radius: 5px;
+        padding: 0;
+        height: 170px;
+        width: 90%;
+        padding: 5px;
+    } 
+    .futures-item p{
+        display: none;
+    }
+    .futures-item h1{
+        font-size: 15px;
+        margin-right: 0px;
+    }
+    .future-icon{
+        margin-top: 7px;
+        margin-bottom: 7px;
+        height: 60px;
+        width: 60px;
         border-radius: 10px;
-        cursor: pointer;
+        opacity: 0.6;
     }
 }

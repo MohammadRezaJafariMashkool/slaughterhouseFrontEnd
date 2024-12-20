@@ -35,7 +35,6 @@ const Ads = () => {
                     و برای بازدید تماس بگیرید
                   </p>
                 </div>
-                <div className="add-card-footer"><p>09123332525</p></div>
               </div>
             </div>
           ))}
@@ -46,7 +45,6 @@ const Ads = () => {
                 <div className="modal-item-detail-container">
                     <span class="close" onClick={closeModal}>&times;</span>
                     <div className='flxrow'><h3>نام آگهی دهنده: </h3><p>محسن تنابنده</p></div>
-                    <div className='flxrow'><h3>شماره تلفن: </h3><p>09121200405</p></div>
                     <div className='flxcln'><h3>توضیحات تکمیلی آگهی: </h3><p>تمامی دام ها درروستای فلان می باشند و برای بازدید تماس بگیرید تمامی دام ها درروستای فلان می باشند و برای بازدید تماس بگیرید تمامی دام ها درروستای فلان می باشند و برای بازدید تماس بگیرید</p></div>
                 </div>
                 <div className="modal-item-image-container">

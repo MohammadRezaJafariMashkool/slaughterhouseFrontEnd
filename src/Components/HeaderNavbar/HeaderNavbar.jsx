@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import './HeaderNavbar.css';
 import { ShopContext } from '../../Context/ShopContext'; 
 import siteIcon from '../../Assets/LogoBigDark.png';
+import siteIconWhite from '../../Assets/LogoBigLight.png';
 
 import productIcon from '../../Assets/Icons/NavPrtDark.png';
 import adsIcon from '../../Assets/Icons/NavAdsDark.png';
@@ -28,6 +29,7 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleProfileModal, onToggleSignInM
   return (
     <div className="header">
       <div className="header-offers">
+          <img className="header-offers-site-icon" src={siteIconWhite} alt="" />
         <a className="header-offers-button" href="#productprice">
           <img src={OffersIcon} alt="" />
           <h2>پیشنهادات شگفت انگیز</h2>
@@ -37,7 +39,7 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleProfileModal, onToggleSignInM
         <a className="header-site-icon" href="#home"><img src={siteIcon} alt="" /></a>
         <div className="header-navigation">
           <a
-            className={`nav-button ${selectedButton === 'products' ? 'redGrad nav-button' : 'nav-button'}`}
+            className={`nav-button nav-button-products ${selectedButton === 'products' ? 'redGrad nav-button' : 'nav-button'}`}
             onClick={() => handleButtonClick('products')}
             href="#products"
           >
@@ -58,7 +60,7 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleProfileModal, onToggleSignInM
             <img src={scheduleIcon} alt="" /><p>برنامه زمانی</p>
           </a>
           <a
-            className={`nav-button ${selectedButton === 'ads' ? 'redGrad nav-button' : 'nav-button'}`}
+            className={`nav-button nav-button-ads ${selectedButton === 'ads' ? 'redGrad nav-button' : 'nav-button'}`}
             onClick={() => handleButtonClick('ads')}
             href="#ads"
           >
@@ -72,7 +74,7 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleProfileModal, onToggleSignInM
             <img src={NavNewAd} alt="" /><p>ایجاد آگهی</p>
           </a>
           <a
-            className={`nav-button ${selectedButton === 'about' ? 'redGrad nav-button' : 'nav-button'}`}
+            className={`nav-button nav-button-about ${selectedButton === 'about' ? 'redGrad nav-button' : 'nav-button'}`}
             onClick={() => handleButtonClick('about')}
             href="#about"
           >
