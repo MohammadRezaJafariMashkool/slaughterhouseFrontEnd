@@ -1,14 +1,14 @@
 /* Modal styling */
 .cartmodal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
   }
   
   .cartmodal-overlay {
@@ -26,30 +26,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    padding-top: 30px;
     top: 0;
     left: 0;
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    height: 75%;
-    margin: 2%;
-    z-index: 1001;
-  }
-
-  .cartmodal-content h2{
-    width: auto;
+    width: 100%;
+    height: 100%;
   }
   .cartmodal-close-btn {
-    position: absolute; /* Position the child relative to the parent */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;    
-    top: 2px;
-    right: 2px;
+    position: absolute;
+    width: 35px;
+    height: 35px;    
+    top: 20px;
+    right: 40px;
     border-radius: 10px;
     cursor: pointer;
   }  
@@ -96,5 +85,39 @@
 }
 @media (max-width:653px){  
 }
-@media (max-width:545px){  
+@media (max-width:545px){   
+  .products-list-container{
+    flex-direction: column;
+    gap: 20px;
+  }
+  .products-list-small-card{
+      width: 90%;
+  }
+  .header-small-card-prices{
+      width: 100%;
+      height: 40px;
+  }
+  .prices-table-body{
+      width: 100%;
+  }
+  .add-to-cart-butn{
+      width: 60%;
+      height: 50px;
+  }
+  .header-small-card-prices p{
+      margin: 10px;
+      font-size: 13px;
+      font-weight: 600;
+  }
+  .checkout-btn{    
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: green;
+      color: white;
+      width: 30%;
+      border-radius: 5px;
+      height: 30px;
+      cursor: pointer;
+  }
 }

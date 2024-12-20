@@ -1,156 +1,154 @@
 import React, { useState } from 'react';
 import './SigninModal.css';
 import CloseBtnIcon from '../../Assets/cart_cross_icon.png';
+
 const SigninModal = () => {
-  // State for shopping cart items count
-  const [cartCount, setCartCount] = useState(0);
+  const [isSignInOrUp, setIsSignInOrUp] = useState("signup");
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
-  // State for modal visibility
-  const [isModalOpen, setIsModalOpen] = useState(true); // Assuming it starts visible
+  // State for input values
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  // Close the modal
+  // Validation rules
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]{10}$/;
+  const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  // Prices of products (7 for each table)
-  const prices = Array(14).fill(1000000); // Replace with actual prices as needed
-  
-  // States for product quantities
-  const [quantities, setQuantities] = useState(
-    Array(14).fill(0) // Default quantities for 14 products (7 for each table)
-  );
-
-  // Handles input change
-  const handleInputChange = (index, value) => {
-    const newQuantities = [...quantities];
-    newQuantities[index] = value ? parseInt(value) || 0 : 0; // Update quantity
-    setQuantities(newQuantities);
+  const toggleForm = () => {
+    setIsSignInOrUp((prev) => (prev === "signup" ? "signin" : "signup"));
   };
 
-  // Calculate total price
-  const calculateTotal = () => {
-    return quantities.reduce((total, quantity, index) => {
-      return total + (quantity * prices[index]); // Multiply price by quantity and add to total
-    }, 0);
+  const handleSubmit = () => {
+    if (isSignInOrUp === "signup") {
+      if (!name || name.length > 50) {
+        alert("Name is required and should be less than 50 characters.");
+        return;
+      }
+      if (!emailRegex.test(email)) {
+        alert("Enter a valid email.");
+        return;
+      }
+      if (!phoneRegex.test(phone)) {
+        alert("Enter a valid 10-digit phone number.");
+        return;
+      }
+      if (address.length > 200) {
+        alert("Address should not exceed 200 characters.");
+        return;
+      }
+      if (!passwordRules.test(password)) {
+        alert("Password should be at least 8 characters, contain an uppercase letter, a lowercase letter, and a number.");
+        return;
+      }
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+      alert("Signup Successful!");
+    } else {
+      if (!emailRegex.test(email) || !password) {
+        alert("Enter valid email and password.");
+        return;
+      }
+      alert("Signin Successful!");
+    }
   };
 
   return (
-    <div
-      className="SigninModal"
-      style={{ display: isModalOpen ? 'block' : 'none' }}
-    >
-      <div className="SigninModal-overlay" onClick={closeModal}></div>
-      <div className="SigninModal-content">
-        <h2>سبد خرید</h2>
-
-        <div className="cartproducts-list-container">
-          {/* First Table */}
-          <div className="products-list-small-card">
-            <div className="header-small-card-cart-prices">
-              <p>گوشت گوساله</p>
+    <div className="signinup-modal" style={{ display: isModalOpen ? 'block' : 'none' }}>
+      <div className="signinup-modal-overlay" onClick={closeModal}></div>
+      <div className="signinup-modal-content">
+          {isSignInOrUp === "signup" ? (
+            <div className="signinup-container">
+              <h2>{isSignInOrUp === "signup" ? "ثبتنام" : "ورود"}</h2>
+              <input
+                className="signinup-input"
+                type="text"
+                placeholder="نام: و نام خانوادگی"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength="50"
+              />
+              <input
+                className="signinup-input"
+                type="text"
+                placeholder="شماره تلفن: "
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <textarea
+                className="signinup-input-long"
+                placeholder="آدرس: "
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                maxLength="300"
+                rows="3"
+              />
+              <input
+                className="signinup-input"
+                type="email"
+                placeholder="ایمیل: "
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                className="signinup-input"
+                type="password"
+                placeholder="رمز عبور: "
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <input
+                className="signinup-input"
+                type="password"
+                placeholder="تکرار رمز عبور: "
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <div className="submit-button" onClick={handleSubmit}>
+                <p>ثبتنام</p>                
+              </div>
+              <p className="login-p" onClick={toggleForm}>
+                قبلا ثبتنام کرده ام ورود
+              </p>
             </div>
-            <div className="body-small-card-cart-prices">
-              <div className="cart-prices-right">
-                <div className="cart-prices-item-right"><p>ران گوساله</p></div>
-                <div className="cart-prices-item-right"><p>سردست گوساله</p></div>
-                <div className="cart-prices-item-right"><p>راسته گوساله</p></div>
-                <div className="cart-prices-item-right"><p>گردن گوساله</p></div>
-                <div className="cart-prices-item-right"><p>فیله گوساله</p></div>
-                <div className="cart-prices-item-right"><p>قلوه گاه گوساله</p></div>
-                <div className="cart-prices-item-right"><p>لاشه گوساله</p></div>
-              </div>
-              <div className="cart-prices-middle">
-                {prices.slice(0, 7).map((price, idx) => (
-                  <div key={idx} className="cart-prices-item-middle"><p>{price}</p><p>تومان</p></div>
-                ))}
-              </div>
-              <div className="cart-prices-left">
-                {quantities.slice(0, 7).map((quantity, idx) => (
-                  <div key={idx} className="cart-prices-item-left">
-                    <input
-                      className="product-amount-txb"
-                      type="number"
-                      value={quantity}
-                      onChange={(e) => {
-                        const value = Math.max(0, Math.min(999, Number(e.target.value))); // Restrict value between 0 and 999
-                        handleInputChange(idx, value);
-                      }}
-                      onKeyDown={(e) => {
-                        // Prevent invalid input
-                        if (
-                          e.key === '-' ||
-                          e.key === 'e' ||
-                          e.key === '.'
-                        ) {
-                          e.preventDefault();
-                        }
-                      }}
-                    />
-                    <p>کیلو</p>
-                  </div>
-                ))}
-              </div>
+          ) : (
+            <div className="signinup-container">
+              <h2>{isSignInOrUp === "signup" ? "ثبتنام" : "ورود"}</h2>
+              <input
+                className="signinup-input-email"
+                type="email"
+                placeholder="ایمیل: "
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                className="signinup-input-pass"
+                type="password"
+                placeholder="رمز عبور: "
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button className="submit-button" onClick={handleSubmit}>
+                ورود
+              </button>
+              <p className="forgetpass-p">فراموشی رمز عبور</p>
+              <p className="login-p" onClick={toggleForm}>
+                ثبتنام
+              </p>
             </div>
-          </div>
-
-          {/* Second Table */}
-          <div className="products-list-small-card">
-            <div className="header-small-card-cart-prices">
-              <p>گوشت گوسفند</p>
-            </div>
-            <div className="body-small-card-cart-prices">
-              <div className="cart-prices-right">
-                <div className="cart-prices-item-right"><p>ران گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>سردست گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>راسته گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>گردن گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>فیله گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>قلوه گاه گوسفند</p></div>
-                <div className="cart-prices-item-right"><p>لاشه گوسفند</p></div>
-              </div>
-              <div className="cart-prices-middle">
-                {prices.slice(7).map((price, idx) => (
-                  <div key={idx} className="cart-prices-item-middle"><p>{price}</p><p>تومان</p></div>
-                ))}
-              </div>
-              <div className="cart-prices-left">
-                {quantities.slice(7).map((quantity, idx) => (
-                  <div key={idx + 7} className="cart-prices-item-left">
-                    <input
-                      className="product-amount-txb"
-                      type="number"
-                      value={quantity}
-                      onChange={(e) => {
-                        const value = Math.max(0, Math.min(999, Number(e.target.value))); // Restrict value between 0 and 999
-                        handleInputChange(idx + 7, value);
-                      }}
-                      onKeyDown={(e) => {
-                        // Prevent invalid input
-                        if (
-                          e.key === '-' ||
-                          e.key === 'e' ||
-                          e.key === '.'
-                        ) {
-                          e.preventDefault();
-                        }
-                      }}
-                    />
-                    <p>کیلو</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Total */}
-        <div className="total-container">
-          <p>مبلغ کل: {calculateTotal().toLocaleString()} تومان</p><div className="checkout-btn">تسویه حساب</div>
-        </div>
-
-        <img src={CloseBtnIcon} className='SigninModal-close-btn' onClick={closeModal}></img>
+          )}
       </div>
+      <img src={CloseBtnIcon} className="signinup-modal-close-btn" onClick={closeModal} alt="Close" />
     </div>
   );
 };

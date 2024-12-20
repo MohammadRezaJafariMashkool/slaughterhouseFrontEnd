@@ -11,7 +11,6 @@ import Cart from './Components/CartModal/CartModal';
 import Profile from './Components/ProfileModal/ProfileModal';
 import AdminProfile from './Components/AdminModal/AdminModal';
 import Signin from './Components/SigninModal/SigninModal';
-import Signup from './Components/SignupModal/SignupModal';
 
 function App() {
 
@@ -41,7 +40,6 @@ function App() {
           onToggleCartModal={toggleCartModal}
           onToggleProfileModal={toggleProfileModal}
           onToggleSignInModal={toggleSignInModal}
-          onToggleSignUpModal={toggleSignUpModal}
           onToggleOrderModal={toggleProfileModal}
         />
         <Routes>
@@ -52,9 +50,9 @@ function App() {
 
         {/* Open Modals */}
           {isCartModalOpen && <Cart />}
-          {isProfileModalOpen && (adminState === "noadmin"?<Profile/>:<AdminProfile/>)}
+          {/* {isProfileModalOpen && (adminState === "noadmin"?<Profile/>:<AdminProfile/>)} */}
+          {isProfileModalOpen && <Signin />}
           {isSignInModalOpen && <Signin />}
-          {isSignUpModalOpen && <Signup />}
       </div>
   )
   }

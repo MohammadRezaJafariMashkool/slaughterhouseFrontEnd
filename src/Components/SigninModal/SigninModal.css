@@ -1,5 +1,5 @@
 /* Modal styling */
-.SigninModal {
+.signinup-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -9,58 +9,59 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
-  
-  .SigninModal-overlay {
+  }  
+  .signinup-modal-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .SigninModal-content {
+  }  
+  .signinup-modal-content {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    background: white;
     top: 0;
     left: 0;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    height: 75%;
-    margin: 2%;
-    z-index: 1001;
+    width: 100%;
+    height: 100%;
   }
-
-  .SigninModal-content h2{
-    width: auto;
-  }
-  .SigninModal-close-btn {
-    position: absolute; /* Position the child relative to the parent */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;    
-    top: 2px;
-    right: 2px;
+  .signinup-modal-close-btn {
+    position: absolute;
+    width: 35px;
+    height: 35px;    
+    top: 20px;
+    right: 40px;
     border-radius: 10px;
     cursor: pointer;
   }  
 
-
-
-@media (max-width:1380px){  
-}
-@media (max-width:865px){  
-}
-@media (max-width:653px){  
-}
-@media (max-width:545px){  
-}
+  /* signup */
+  .signinup-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 5px;
+  }
+  .signinup-container p{cursor: pointer;}
+  .signinup-input{width: 250px; height: 35px;border-radius: 5px;}
+  .signinup-input-long{ width: 250px;border-radius: 5px;}
+  .submit-button{ 
+    width: 250px;
+    height: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    border-radius: 5px;
+    cursor: pointer;
+  }

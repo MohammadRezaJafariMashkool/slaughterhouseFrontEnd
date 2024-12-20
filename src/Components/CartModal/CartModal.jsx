@@ -35,7 +35,6 @@ const CartModal = () => {
       <div className="cartmodal-overlay" onClick={closeModal}></div>
       <div className="cartmodal-content">
         <h2>سبد خرید</h2>
-
         <div className="products-list-container" id="productprice">
         
           {/* Cow Products Table */}
@@ -43,25 +42,25 @@ const CartModal = () => {
             <div className="header-small-card-prices">
               <p>گوشت گوساله</p>
             </div>
-              <div className="prices-table-body">
-                {AllProducts.map((item, i)=>{
-                  if(item.category === "Cow"){
-                    return <div  className="prices-item-container">
-                              <div key={i} className="prices-item">
-                                <img className="product-img" src={item.image} alt="" />
-                                <p className="product-name">{item.name}</p>
-                                <p className="product-price">{item.new_price}</p>
-                                <p className="product-price-sign">تومان مقدار:</p>                          
-                                <input className="product-amount-txb" type="number" defaultValue={cartItems[item.id]>0?cartItems[item.id]:0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
-                                <p className="product-kilo">کیلو</p>
-                              </div>   
-                          </div>
-                  }
-                  else{
-                    return null
-                  }
-                })}
-              </div>
+            <div className="prices-table-body">
+              {AllProducts.map((item, i)=>{
+                if(item.category === "Cow"){
+                  return <div  className="prices-item-container">
+                            <div key={i} className="prices-item">
+                              <img className="product-img" src={item.image} alt="" />
+                              <p className="product-name">{item.name}</p>
+                              <p className="product-price">{item.new_price}</p>
+                              <p className="product-price-sign">تومان مقدار:</p>                          
+                              <input className="product-amount-txb" type="number" defaultValue={cartItems[item.id]>0?cartItems[item.id]:0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
+                              <p className="product-kilo">کیلو</p>
+                            </div>   
+                        </div>
+                }
+                else{
+                  return null
+                }
+              })}
+            </div>
           </div>
 
           {/* Lamb Products Table */}
