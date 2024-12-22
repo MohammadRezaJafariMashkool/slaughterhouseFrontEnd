@@ -1,6 +1,6 @@
-.ads-title{
+/* .ads-title{
   padding-top: 110px;
-}
+} */
 .adslist{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

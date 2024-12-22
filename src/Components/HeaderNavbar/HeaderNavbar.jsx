@@ -85,9 +85,9 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleProfileModal, onToggleSignInM
             <p>سبد خرید ({getTotalCartItems()})</p>
           </div>
 
-          <div className="nav-button" onClick={onToggleProfileModal}>
+          <div className="nav-button" onClick={localStorage.getItem('user-name')?onToggleProfileModal:onToggleSignInModal}>
             <img src={UserIcon} alt="" />
-            <p>ورود/ثبتنام</p>
+            <p>{localStorage.getItem('user-name')?localStorage.getItem('user-name'):"ورود/ثبتنام"}</p>
           </div>
         </div>
       </div>

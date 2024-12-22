@@ -8,16 +8,16 @@ import Products from '../Products/Products'
 import AboutUs from '../AboutUs/AboutUs'
 import ShopContextProvider from '../../Context/ShopContext';
 
-const PageHome = ({onToggleCartModal}) => {
+const PageHome = ({onToggleCartModal, onToggleSignInModal}) => {
 
   return (
     <div className='pagehome flxcln'>
       <Banner/>
       <Products onToggleCartModal={onToggleCartModal}/>
-      <Schedule/>
+      <Schedule onToggleSignInModal={onToggleSignInModal}/>
       <h1 className='ads-title' id="ads">آگهی های اخیر:</h1>
       <Ads />
-      <AddAd/>
+      <AddAd onToggleSignInModal={onToggleSignInModal}/>
       <AboutUs/>      
     </div>
   )

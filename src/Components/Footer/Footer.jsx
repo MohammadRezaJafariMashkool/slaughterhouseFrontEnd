@@ -11,7 +11,7 @@ import TelIcon from '../../Assets/Icons/TgmIcon.png'
 const Footer = () => {
   return (
     <div className="footer brn">
-        <p className='txtclrcrm'>Copy Right © 2029 MRJM LLC</p>
+        <p className='txtclrcrm'>Copyright @ 2013 - 2025 MRJM LLC</p>
         <div className="icons-container">
             <img src={IsoIcon} alt="" className="footer-icon" />
             <img src={EacIcon} alt="" className="footer-icon" />

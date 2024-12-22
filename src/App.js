@@ -10,20 +10,18 @@ import Footer  from './Components/Footer/Footer';
 import Cart from './Components/CartModal/CartModal';
 import Profile from './Components/ProfileModal/ProfileModal';
 import AdminProfile from './Components/AdminModal/AdminModal';
-import Signin from './Components/SigninModal/SigninModal';
+import SignInUp from './Components/SigninModal/SigninModal';
 
 function App() {
 
   // State for modal visibility
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   // Handlers for toggling modals
   const toggleCartModal = () => setIsCartModalOpen((prev) => !prev);
   const toggleSignInModal = () => setIsSignInModalOpen((prev) => !prev);
-  const toggleSignUpModal = () => setIsSignUpModalOpen((prev) => !prev);
   const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
 
   // State for checking isAdmin
@@ -40,10 +38,9 @@ function App() {
           onToggleCartModal={toggleCartModal}
           onToggleProfileModal={toggleProfileModal}
           onToggleSignInModal={toggleSignInModal}
-          onToggleOrderModal={toggleProfileModal}
         />
         <Routes>
-          <Route path='/' element={<PageHome onToggleCartModal={toggleCartModal}/>}/>         
+          <Route path='/' element={<PageHome onToggleCartModal={toggleCartModal}/>} onToggleSignInModal={toggleSignInModal}/>         
         </Routes>
         <Footer/>
       </BrowserRouter>
@@ -51,8 +48,8 @@ function App() {
         {/* Open Modals */}
           {isCartModalOpen && <Cart />}
           {/* {isProfileModalOpen && (adminState === "noadmin"?<Profile/>:<AdminProfile/>)} */}
-          {isProfileModalOpen && <Signin />}
-          {isSignInModalOpen && <Signin />}
+          {isProfileModalOpen && <SignInUp />}
+          {isSignInModalOpen && <SignInUp />}
       </div>
   )
   }

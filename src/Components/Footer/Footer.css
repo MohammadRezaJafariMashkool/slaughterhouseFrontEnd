@@ -26,3 +26,18 @@
     color: #FECAB3;
     cursor: pointer;
 }
+@media (max-width:1380px){    
+}
+@media (max-width:865px){ 
+}
+@media (max-width:653px){  
+}
+@media (max-width:545px){  
+    .icons-container{
+        display: none;
+    }
+    .footer{
+        margin-bottom: 6vh;
+        margin-top: 10px;
+    }
+}

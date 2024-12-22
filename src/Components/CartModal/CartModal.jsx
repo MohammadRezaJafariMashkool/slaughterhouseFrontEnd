@@ -15,18 +15,6 @@ const CartModal = () => {
     setIsModalOpen(false);
   }; 
   
-  // States for product quantities
-  const [quantities, setQuantities] = useState(
-    Array(14).fill(0) // Default quantities for 14 products (7 for each table)
-  );
-
-  // Handles input change
-  const handleInputChange = (index, value) => {
-    const newQuantities = [...quantities];
-    newQuantities[index] = value ? parseInt(value) || 0 : 0; // Update quantity
-    setQuantities(newQuantities);
-  };
-
   return (
     <div
       className="cartmodal"
@@ -51,7 +39,7 @@ const CartModal = () => {
                               <p className="product-name">{item.name}</p>
                               <p className="product-price">{item.new_price}</p>
                               <p className="product-price-sign">تومان مقدار:</p>                          
-                              <input className="product-amount-txb" type="number" defaultValue={cartItems[item.id]>0?cartItems[item.id]:0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
+                              <input className="product-amount-txb" type="number" defaultValue={cartItems[item._id]>0?cartItems[item._id]:0} onChange={(e) => addToCart(item._id, e.target.value)}/>
                               <p className="product-kilo">کیلو</p>
                             </div>   
                         </div>
@@ -77,7 +65,7 @@ const CartModal = () => {
                                   <p className="product-name">{item.name}</p>
                                   <p className="product-price">{item.new_price}</p>
                                   <p className="product-price-sign">تومان مقدار:</p>                          
-                                  <input className="product-amount-txb" type="number" defaultValue={cartItems[item.id]>0?cartItems[item.id]:0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
+                                  <input className="product-amount-txb" type="number" defaultValue={cartItems[item._id]>0?cartItems[item._id]:0} onChange={(e) => addToCart(item._id, e.target.value)}/>
                                   <p className="product-kilo">کیلو</p>
                                 </div>
                             </div>

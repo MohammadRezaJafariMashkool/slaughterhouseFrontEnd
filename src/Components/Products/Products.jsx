@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {ShopContext} from '../../Context/ShopContext'
 import './Products.css';
 import Beef_details_image from '../../Assets/beef-cuts.jpg';
@@ -9,32 +9,11 @@ const Product = (props) => {
   const {AllProducts} = useContext(ShopContext);
   const {addToCart} = useContext(ShopContext);
 
-  // States for product quantities
-  const [quantities, setQuantities] = useState(
-    Array(14).fill(0) // Default quantities for 14 products
-  );
-
-  // Handles input change
-  const handleInputChange = (id, value) => {
-    const newQuantities = [...quantities];
-    newQuantities[id] = value ? parseInt(value) || 0 : 0; // Update quantity
-    setQuantities(newQuantities);
-  };
-
   const handleAddToCart = () => {
-    quantities.forEach((quantity, id) => {
-      if (quantity > 0) {
-        addToCart(id, quantity); // Add the specific quantity at once
-      }
-    });
-  
-    // Reset all quantities to 0
-    setQuantities(Array(quantities.length).fill(0));
-    
-    // Trigger the cart modal
     props.onToggleCartModal();
-
   };
+  
+  
   
   
 
@@ -60,7 +39,7 @@ const Product = (props) => {
                             <p className="product-name">{item.name}</p>
                             <p className="product-price">{item.new_price}</p>
                             <p className="product-price-sign">تومان مقدار:</p>                          
-                            <input className="product-amount-txb" type="number" defaultValue={0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
+                            <input className="product-amount-txb" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)}/>
                             <p className="product-kilo">کیلو</p>
                           </div>
                       </div>
@@ -86,7 +65,7 @@ const Product = (props) => {
                                 <p className="product-name">{item.name}</p>
                                 <p className="product-price">{item.new_price}</p>
                                 <p className="product-price-sign">تومان مقدار:</p>                          
-                                <input className="product-amount-txb" type="number" defaultValue={0} onChange={(e) => handleInputChange(item.id, e.target.value)}/>
+                                <input className="product-amount-txb" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)}/>
                                 <p className="product-kilo">کیلو</p>
                               </div>
                           </div>
@@ -99,7 +78,7 @@ const Product = (props) => {
         </div>
         
       </div>
-      <button className="add-to-cart-butn" onClick={handleAddToCart}>اضافه به سبد</button>
+      <button className="add-to-cart-butn" onClick={()=>handleAddToCart()}>اضافه به سبد</button>
     </div>
   );
 };

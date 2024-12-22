@@ -100,12 +100,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: green;
-    color: white;
+    background-color: palegreen;
+    color: green;
+    border: 1px solid rgb(0, 69, 10);
+    font-size: 16px;
     width: 20%;
     border-radius: 5px;
+    border-radius: 5px;
     margin-top: 15px;
-    height: 80px;
+    height: 50px;
     cursor: pointer;
 }
 @media (max-width:1380px){    
@@ -117,10 +120,11 @@
 @media (max-width:545px){ 
     .products-list-container{
         flex-direction: column;
+        width: 100%;
         gap: 20px;
     }
     .products-list-small-card{
-        width: 90%;
+        width: 100%;
     }
     .header-small-card-prices{
         width: 100%;
@@ -136,5 +140,39 @@
         margin: 10px;
         font-size: 13px;
         font-weight: 600;
+    }    
+    .prices-item{    
+        display: grid;
+        grid-template-columns: 120px 1fr; /* 2 columns of equal width */
+        gap: 2px; /* Spacing between the boxes */
+        max-width: 100%; /* Optional: Control the total width */
+        width: 100%;
+        padding: 2px;
+    }
+    .product-img{ 
+        width: 50px;
+        height: 50px;
+    }
+    .product-name{
+        font-size: 16px;
+        font-weight: 500;
+        width: 75%;
+    }
+    .product-price{
+        direction: ltr;
+        font-size: 16px;
+        font-weight: 800;
+        width: 95%;
+    }
+    .product-price-sign{
+        font-size: 16px;
+        font-weight: 500;
+        width: 70%;
+    }
+    .product-amount-txb{
+        width: 60px;
+    }
+    .product-kilo{
+        width: 60px;
     }
 }

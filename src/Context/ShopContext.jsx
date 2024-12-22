@@ -16,6 +16,7 @@ const ShopContextProvider = (props)=>{
 
     const [AllProducts, setAllProducts] = useState([]);
     const [AllAds, setAllAds] = useState([]);
+    const [allSchedules, setAllSchedules] = useState([]);
     const [loading, setLoading] = useState(true);
     const[cartItems, setCartItems] = useState(getDefaultCart())
 
@@ -38,7 +39,7 @@ const ShopContextProvider = (props)=>{
         fetch(BackendUrl+'/allads')
             .then((response) => response.json())
             .then((data) => {
-                setAllAds(data.products);
+                setAllAds(data.ads);
                 setLoading(false); // Set loading to false when data is loaded
             })
             .catch((error) => {
@@ -47,46 +48,39 @@ const ShopContextProvider = (props)=>{
             });
     }, []);
 
-
-
-    //const addToCart = (itemId)=>{setCartItems((prev)=>({...prev, [itemId]:prev[itemId]+1}))}
-
     const addToCart = (itemId, quantity = 1) => {
+      
+        // Replace the quantity of the item with the new quantity if the item ID matches
         setCartItems((prev) => ({
-            ...prev,
-            [itemId]: (prev[itemId] || 0) + quantity,
+          ...prev,
+          [itemId]: quantity, // Set the quantity directly for the itemId
         }));
-    };
-    
+      };
+        
+
     const removeFromCart = (itemId)=>{
         setCartItems((prev)=>({...prev, [itemId]:prev[itemId]-1}))
     }
-
     const getTotalCartAmount = ()=>{
          let totalAmount = 0;
          for(const item in cartItems){
              if(cartItems[item]>0){
-                 console.log("Tototal= "+totalAmount)
-                 let itemInfo= AllProducts.find((product)=>product.id === Number(item))
-                 totalAmount += itemInfo.new_price * cartItems[item];
+                 let itemInfo= AllProducts.find((product)=>product._id === item)
+                 totalAmount += Number(itemInfo.new_price) * Number(cartItems[item]);
              }
          }
         return totalAmount
     }
-
     const getTotalCartItems = ()=>{        
         let totalItems = 0;
         for(const item in cartItems){
             if(cartItems[item]>0){
-                totalItems += cartItems[item];
+                totalItems += Number(cartItems[item]);
             }
         }
        return totalItems;
-    }
-
-    
-    const contextValue = {AllProducts, cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalCartItems};
-    
+    }    
+    const contextValue = {allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalCartItems};    
     if (loading) {
         return <div>Loading...</div>;
     }

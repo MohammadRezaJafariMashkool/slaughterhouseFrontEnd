@@ -28,11 +28,11 @@
 }
 .adinputrow{
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
-    flex-direction: row;
-    width: 33%;
-    gap: 50px;
+    flex-direction: column;
+    width: 250px;
+    gap: 5px;
 }
 .adinputrow input{
   padding-right: 10px;
@@ -41,21 +41,46 @@
   border: 1px solid white;
   color: white;
   font-size: 16px;
+  width: 200px;
   height: 35px;
 }
-.long-input{
-    width: 100%;
+.adinputrow p{
+  color: white;
+  font-size: 16px;
+  margin-top: 10px;
 }
+.long-input{
+    width: 216px;
+    height: 200px;
+    background: transparent;
+    border: 1px solid white;
+    color: #ffffff;
+}
+.adinputbtn{
+    background-color: palegreen;
+    color: green;
+    border: 1px solid rgb(0, 69, 10);
+    font-size: 16px;
+    font-size: 16px;
+    width: 220px;
+    height: 35px;
+}
+
 ::placeholder {color: #BA8375;opacity: 1; /* Firefox */}  
 ::-ms-input-placeholder { /* Edge 12-18 */color: #BA8375;}
 
-.adinputrow button{
+.file-upload-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #ffffff;
     cursor: pointer;
     border: 2px solid white;
-    background: transparent;
-    color: white;
-    height: 35px;
-}
+    padding: 5px;
+    width: 209px;
+  }
+  
+  .file-upload-input {display: none;}
 @media (max-width:545px){ 
     .add-ad-container{
         width: 100vw;
