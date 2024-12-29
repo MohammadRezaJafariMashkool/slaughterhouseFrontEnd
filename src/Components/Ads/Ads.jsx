@@ -31,55 +31,58 @@ const Ads = () => {
 
 
   return (
-    <div className="adslist">
-      {AllAds.map((item, i) => (
-        <div className="additem" key={i} onClick={() => openModal(item)}>
-          <img src={BackendUrl+item.image || PlaceHolder} alt="" className="adpic" />
-          <div className="addetails">
-            <div className="add-card-header">
-              <h4>{item.description.substring(0, 50)}</h4>
-            </div>
-            <div className="add-card-body">
-              <p>{item.description}</p>
+    <div className="ads-container">      
+      <h1 className='ads-title' id="ads">آگهی های اخیر:</h1>
+      <div className="adslist">
+        {AllAds.map((item, i) => (
+          <div className="additem" key={i} onClick={() => openModal(item)}>
+            <img src={BackendUrl+item.image || PlaceHolder} alt="" className="adpic" />
+            <div className="addetails">
+              <div className="add-card-header">
+                <h4>{item.description.substring(0, 50)}</h4>
+              </div>
+              <div className="add-card-body">
+                <p>{item.description}</p>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
 
-      {/* Modal Code */}
-      {selectedAd && (
-        <div
-          id="myModal"
-          className="ads-modal"
-          style={{ display: modalDisplay ? 'block' : 'none' }}
-          onClick={handleOutsideClick}
-        >
-          <div className="ads-modal-overlay">
-            <div className="ads-modal-content">
-              <div className="ads-modal-item-image-container">
-                <img
-                  src={BackendUrl+selectedAd.image || PlaceHolder}
-                  alt={selectedAd.title}
-                  className="adpic"
-                />
-              </div>
-              <div className="ads-modal-item-detail-container">
-                <span className="modal-close-btn" onClick={closeModal}>
-                  &times;
-                </span>
-                <div className="flxrow">
-                  <h3>نام آگهی دهنده: </h3>
-                  <p>{selectedAd.advertiserName || 'نامشخص'}</p>
+        {/* Modal Code */}
+        {selectedAd && (
+          <div
+            id="myModal"
+            className="ads-modal"
+            style={{ display: modalDisplay ? 'block' : 'none' }}
+            onClick={handleOutsideClick}
+          >
+            <div className="ads-modal-overlay">
+              <div className="ads-modal-content">
+                <div className="ads-modal-item-image-container">
+                  <img
+                    src={BackendUrl+selectedAd.image || PlaceHolder}
+                    alt={selectedAd.title}
+                    className="adpic"
+                  />
                 </div>
-                <div className="flxcln">
-                  <h3>توضیحات تکمیلی آگهی: </h3>
-                  <p>{selectedAd.description || 'بدون توضیحات'}</p>
+                <div className="ads-modal-item-detail-container">
+                  <span className="modal-close-btn" onClick={closeModal}>
+                    &times;
+                  </span>
+                  <div className="flxrow">
+                    <h3>نام آگهی دهنده: </h3>
+                    <p>{selectedAd.advertiserName || 'نامشخص'}</p>
+                  </div>
+                  <div className="flxcln">
+                    <h3>توضیحات تکمیلی آگهی: </h3>
+                    <p>{selectedAd.description || 'بدون توضیحات'}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

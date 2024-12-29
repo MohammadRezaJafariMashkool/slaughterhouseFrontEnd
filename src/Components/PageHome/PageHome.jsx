@@ -15,7 +15,6 @@ const PageHome = ({onToggleCartModal, onToggleSignInModal}) => {
       <Banner/>
       <Products onToggleCartModal={onToggleCartModal}/>
       <Schedule onToggleSignInModal={onToggleSignInModal}/>
-      <h1 className='ads-title' id="ads">آگهی های اخیر:</h1>
       <Ads />
       <AddAd onToggleSignInModal={onToggleSignInModal}/>
       <AboutUs/>      

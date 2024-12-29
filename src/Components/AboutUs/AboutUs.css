@@ -65,11 +65,8 @@
   padding: 20px;
   gap: 20px;
 }
-.aboutus-item-map-container img{
-  width: 100%;
-  height: 90%;
-  cursor: pointer;
-}
+.aboutus-item-map-container a{width: 100%;height: 90%;}
+.aboutus-item-map-container img{width: 100%;height: 100%;}
 
 @media (max-width:1380px){    
 }
@@ -78,7 +75,7 @@
 @media (max-width:653px){  
 }
 @media (max-width:545px){  
-  .aboutus-container{flex-direction: column; width: 100%; height: auto; gap: 15px;}
+  .aboutus-container{flex-direction: column; width: 97%; height: auto; gap: 15px;}
   .aboutus-item-aboutus{width: 90%; height: 80vh; overflow-y: auto;}
   .aboutus-item-contact{width: 90%; height: 80vh; overflow-y: auto;}
   .aboutus-item-map-container{width: 90%; height: 80vh; overflow-y: auto;}

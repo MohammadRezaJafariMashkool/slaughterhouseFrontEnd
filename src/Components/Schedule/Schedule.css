@@ -5,7 +5,6 @@
   justify-content: center;
   width: 100%;
   border-radius: 10px;
-  height: 94vh;
   margin-top: 110px;
   padding-top: 110px;
   background-image: url('../../Assets/Texture/3.jpg'); /* Add the texture image */
@@ -85,7 +84,8 @@
   border-radius: 10px;
   width: 100%;
   height: 90%;
-  gap: 10%;
+  gap: 50px;
+  margin-bottom: 50px;
 }
 .inputs{
     width: 90%;

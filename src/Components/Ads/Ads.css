@@ -1,11 +1,18 @@
-/* .ads-title{
-  padding-top: 110px;
-} */
+.ads-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 800px;
+}
+ .ads-title{
+  padding-top: 50px;
+} 
 .adslist{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: 90%;
-    height: 750px;
+    height: 730px;
     direction: ltr;
     overflow-y: scroll;
     gap: 2%;

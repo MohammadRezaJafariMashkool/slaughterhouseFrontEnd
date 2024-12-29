@@ -92,14 +92,12 @@
     }    
     .adinputrow{
         flex-direction: column;
+        width: 80%;
     }
     
-    .adinputrow input{
-        width: 60vw;
-    }
     
 .adinputrow input{width: 90%;}
-  .long-input{width: 94%;}
-  .adinputbtn{width: 95%;}  
-  .file-upload-label {width: 92%;}
+  .long-input{width: 95%;}
+  .adinputbtn{width: 96%;}  
+  .file-upload-label {width: 93%;}
 }

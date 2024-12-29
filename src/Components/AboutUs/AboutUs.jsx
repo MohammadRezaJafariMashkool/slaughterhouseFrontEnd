@@ -24,14 +24,13 @@ const AboutUs = () => {
       <div className="aboutus-item-contact">
             <h1>اطلاعات تماس:</h1>
             <div className="aboutus-item-contact-rows-container"><h3>شماره های تماس: </h3><p className='ltr'>(+98) 21 33448891 - 99</p></div>
-            <div className="aboutus-item-contact-rows-container"><h3>ایمیل: </h3><p className='ltr'>torshizi@gmail.com</p></div>
-            <div className="aboutus-item-contact-rows-container"><h3>آدرس: </h3><p>تهران، خیابان سعادت، میدان گلریز، شهرک کلدان، ساختمان گل، پلاک 12</p></div>
+            <div className="aboutus-item-contact-rows-container"><h3>ایمیل: </h3><p className='ltr'>torshizimeat@gmail.com</p></div>
+            <div className="aboutus-item-contact-rows-container"><h3>آدرس: </h3><p>بلوارابوذر پل پنجم جنب بانک ملت</p></div>
 
       </div>
       <div className="aboutus-item-map-container">
             <h1>ما رو اینجا میتونید پیدا کنید: </h1>
-            <img src={map} alt="map" />
-
+            <a href="https://maps.app.goo.gl/jFziZrQh7tX6k4hT7" target='_blank' rel="noreferrer"><img src={map} alt="map"/></a>
       </div>
     </div>
   )
