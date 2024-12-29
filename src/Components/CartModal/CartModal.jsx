@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import './CartModal.css';
 import CloseBtnIcon from '../../Assets/cart_cross_icon.png';
 import {ShopContext} from '../../Context/ShopContext';
+import { ImagesUrl } from '../../Constants/userConstants';
 
 const CartModal = () => {
 
@@ -35,11 +36,11 @@ const CartModal = () => {
                 if(item.category === "Cow"){
                   return <div  className="prices-item-container">
                             <div key={i} className="prices-item">
-                              <img className="product-img" src={item.image} alt="" />
+                              <img className="product-img" src={ImagesUrl+item.images[0].url} alt="" />
                               <p className="product-name">{item.name}</p>
-                              <p className="product-price">{item.new_price}</p>
+                              <p className="product-price">{item.new_price.toLocaleString()}</p>
                               <p className="product-price-sign">تومان مقدار:</p>                          
-                              <input className="product-amount-txb" type="number" defaultValue={cartItems[item._id]>0?cartItems[item._id]:0} onChange={(e) => addToCart(item._id, e.target.value)}/>
+                              <input className="product-amount-txb" type="number" defaultValue={cartItems[item._id]>0?cartItems[item._id]:0} onChange={(e) => addToCart(item._id, e.target.value)} maxlength="3"/>
                               <p className="product-kilo">کیلو</p>
                             </div>   
                         </div>
@@ -61,11 +62,11 @@ const CartModal = () => {
                     if(item.category === "Sheep"){
                       return <div  className="prices-item-container">
                                 <div key={i} className="prices-item">
-                                  <img className="product-img" src={item.image} alt="" />
+                                  <img className="product-img" src={ImagesUrl+item.images[0].url} alt="" />
                                   <p className="product-name">{item.name}</p>
-                                  <p className="product-price">{item.new_price}</p>
+                                  <p className="product-price">{item.new_price.toLocaleString()}</p>
                                   <p className="product-price-sign">تومان مقدار:</p>                          
-                                  <input className="product-amount-txb" type="number" defaultValue={cartItems[item._id]>0?cartItems[item._id]:0} onChange={(e) => addToCart(item._id, e.target.value)}/>
+                                  <input className="product-amount-txb" type="number" defaultValue={cartItems[item._id]>0?cartItems[item._id]:0} onChange={(e) => addToCart(item._id, e.target.value)} maxlength="3"/>
                                   <p className="product-kilo">کیلو</p>
                                 </div>
                             </div>
@@ -82,10 +83,12 @@ const CartModal = () => {
         {/* Total */}
         <div className="total-container">
           {/* <p>مبلغ کل: {calculateTotal().toLocaleString()} تومان</p><div className="checkout-btn">تسویه حساب</div> */}
-          <p>مبلغ کل: {getTotalCartAmount()} تومان</p><div className="checkout-btn">تسویه حساب</div>
+          <p>مبلغ کل: {getTotalCartAmount().toLocaleString()} تومان</p><div className="checkout-btn">تسویه حساب</div>
         </div>
 
-        <img src={CloseBtnIcon} className='cartmodal-close-btn' onClick={closeModal}></img>
+        <span className="modal-close-btn" onClick={closeModal}>
+                  &times;
+         </span>
       </div>
     </div>
   );

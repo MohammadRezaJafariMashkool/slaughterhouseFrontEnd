@@ -50,30 +50,32 @@ const Ads = () => {
       {selectedAd && (
         <div
           id="myModal"
-          className="modal"
+          className="ads-modal"
           style={{ display: modalDisplay ? 'block' : 'none' }}
           onClick={handleOutsideClick}
         >
-          <div className="modal-content">
-            <div className="modal-item-detail-container">
-              <span className="close" onClick={closeModal}>
-                &times;
-              </span>
-              <div className="flxrow">
-                <h3>نام آگهی دهنده: </h3>
-                <p>{selectedAd.advertiserName || 'نامشخص'}</p>
+          <div className="ads-modal-overlay">
+            <div className="ads-modal-content">
+              <div className="ads-modal-item-image-container">
+                <img
+                  src={BackendUrl+selectedAd.image || PlaceHolder}
+                  alt={selectedAd.title}
+                  className="adpic"
+                />
               </div>
-              <div className="flxcln">
-                <h3>توضیحات تکمیلی آگهی: </h3>
-                <p>{selectedAd.description || 'بدون توضیحات'}</p>
+              <div className="ads-modal-item-detail-container">
+                <span className="modal-close-btn" onClick={closeModal}>
+                  &times;
+                </span>
+                <div className="flxrow">
+                  <h3>نام آگهی دهنده: </h3>
+                  <p>{selectedAd.advertiserName || 'نامشخص'}</p>
+                </div>
+                <div className="flxcln">
+                  <h3>توضیحات تکمیلی آگهی: </h3>
+                  <p>{selectedAd.description || 'بدون توضیحات'}</p>
+                </div>
               </div>
-            </div>
-            <div className="modal-item-image-container">
-              <img
-                src={BackendUrl+selectedAd.image || PlaceHolder}
-                alt={selectedAd.title}
-                className="adpic"
-              />
             </div>
           </div>
         </div>

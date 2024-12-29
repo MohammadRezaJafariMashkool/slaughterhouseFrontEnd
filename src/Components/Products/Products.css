@@ -143,8 +143,12 @@
     }    
     .prices-item{    
         display: grid;
-        grid-template-columns: 120px 1fr; /* 2 columns of equal width */
+        /*grid-template-columns: 3 1fr; /* 2 columns of equal width */
         gap: 2px; /* Spacing between the boxes */
+
+        grid-template-columns: 1fr 2.5fr 1fr 1fr 1fr 0.2fr; /* 3 columns */
+        grid-template-rows: auto 1fr auto; /* Rows with dynamic height */
+
         max-width: 100%; /* Optional: Control the total width */
         width: 100%;
         padding: 2px;
@@ -170,9 +174,13 @@
         width: 70%;
     }
     .product-amount-txb{
-        width: 60px;
+        width: 30px;
     }
     .product-kilo{
         width: 60px;
+    }
+    .prices-item p{
+        font-size: 13px;
+        font-weight: 800;
     }
 }

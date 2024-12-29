@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import {ShopContext} from '../../Context/ShopContext'
 import './Products.css';
 import Beef_details_image from '../../Assets/beef-cuts.jpg';
+import { ImagesUrl } from '../../Constants/userConstants';
 
 const Product = (props) => {
 
@@ -35,11 +36,11 @@ const Product = (props) => {
               if(item.category === "Cow"){
                 return <div  className="prices-item-container">
                           <div key={i} className="prices-item">
-                            <img className="product-img" src={item.image} alt="" />
+                            <img className="product-img" src={ImagesUrl+item.images[0].url} alt="" />
                             <p className="product-name">{item.name}</p>
-                            <p className="product-price">{item.new_price}</p>
+                            <p className="product-price">{item.new_price.toLocaleString()}</p>
                             <p className="product-price-sign">تومان مقدار:</p>                          
-                            <input className="product-amount-txb" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)}/>
+                            <input className="product-amount-txb" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)} maxlength="3"/>
                             <p className="product-kilo">کیلو</p>
                           </div>
                       </div>
@@ -61,11 +62,11 @@ const Product = (props) => {
                   if(item.category === "Sheep"){
                     return <div  className="prices-item-container">
                               <div key={i} className="prices-item">
-                                <img className="product-img" src={item.image} alt="" />
+                                <img className="product-img" src={ImagesUrl+item.images[0].url} alt="" />
                                 <p className="product-name">{item.name}</p>
-                                <p className="product-price">{item.new_price}</p>
+                                <p className="product-price">{item.new_price.toLocaleString()}</p>
                                 <p className="product-price-sign">تومان مقدار:</p>                          
-                                <input className="product-amount-txb" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)}/>
+                                <input className="product-amount-txb" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)} maxlength="3"/>
                                 <p className="product-kilo">کیلو</p>
                               </div>
                           </div>
