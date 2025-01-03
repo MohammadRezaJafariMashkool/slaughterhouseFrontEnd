@@ -22,17 +22,18 @@ const AdminModal = () => {
       className="adminmodal"
       style={{ display: isModalOpen ? 'block' : 'none' }}
     >
-      <div className="adminmodal-overlay" onClick={closeModal}></div>
-      <div className="adminmodal-content">
-        <h2>پنل مدیریت</h2>        
-        <img src={CloseBtnIcon} alt='close button' className='adminmodal-close-btn' onClick={closeModal}></img>
+      <div className="adminmodal-overlay">        
+        <div className="adminmodal-content">
+          <h2>پنل مدیریت</h2>        
+          <img src={CloseBtnIcon} alt='close button' className='adminmodal-close-btn' onClick={closeModal}></img>
 
-        <AdminNavbar bodyState={bodyState} setBodyState={setBodyState}/>
-        {/* Body Sections */}
-        {bodyState === "products" && <AdminListProduct />}
-        {bodyState === "orders" && <AdminListOrders />}
-        {bodyState === "users" && <AdminListUsers />}
-        {bodyState === "ads" && <AdminListAds />}
+          <AdminNavbar bodyState={bodyState} setBodyState={setBodyState}/>
+          {/* Body Sections */}
+          {bodyState === "products" && <AdminListProduct />}
+          {bodyState === "orders" && <AdminListOrders />}
+          {bodyState === "users" && <AdminListUsers />}
+          {bodyState === "ads" && <AdminListAds />}
+        </div>
       </div>
     </div>
   );

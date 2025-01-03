@@ -36,7 +36,7 @@ const Product = (props) => {
               if(item.category === "Cow"){
                 return <div  className="prices-item-container">
                           <div key={i} className="prices-item">
-                            <img className="product-img" src={ImagesUrl+item.images[0].url} alt="" />
+                            <img className="product-img" src={ImagesUrl+item.image} alt="" />
                             <p className="product-name">{item.name}</p>
                             <p className="product-price">{item.new_price.toLocaleString()}</p>
                             <p className="product-price-sign">تومان مقدار:</p>                          
@@ -62,7 +62,7 @@ const Product = (props) => {
                   if(item.category === "Sheep"){
                     return <div  className="prices-item-container">
                               <div key={i} className="prices-item">
-                                <img className="product-img" src={ImagesUrl+item.images[0].url} alt="" />
+                                <img className="product-img" src={ImagesUrl+item.image} alt="" />
                                 <p className="product-name">{item.name}</p>
                                 <p className="product-price">{item.new_price.toLocaleString()}</p>
                                 <p className="product-price-sign">تومان مقدار:</p>                          

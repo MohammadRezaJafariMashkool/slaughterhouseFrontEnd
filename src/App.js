@@ -24,12 +24,7 @@ function App() {
   const toggleSignInModal = () => setIsSignInModalOpen((prev) => !prev);
   const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
 
-  // State for checking isAdmin
-  //const [adminState, setAdminState] = useState("noadmin")
-  const [adminState, setAdminState] = useState("admin")
   
-  // Function to update the state
-  const updateState = (newValue) => {setAdminState(newValue);}
   
   return (
     <div className="main-container">
@@ -47,8 +42,7 @@ function App() {
 
         {/* Open Modals */}
           {isCartModalOpen && <Cart />}
-          {/* {isProfileModalOpen && (adminState === "noadmin"?<Profile/>:<AdminProfile/>)} */}
-          {isProfileModalOpen && <SignInUp />}
+          {isProfileModalOpen && (localStorage.getItem('user-role') === "admin"?<AdminProfile/>:<Profile/>)} 
           {isSignInModalOpen && <SignInUp />}
       </div>
   )

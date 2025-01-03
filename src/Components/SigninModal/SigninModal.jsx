@@ -17,7 +17,7 @@ const SigninModal = () => {
 
   // Validation rules
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phoneRegex = /^[0-9]{12}$/;
+  const phoneRegex = /^[0-9]{11}$/;
   const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
   const closeModal = () => {
