@@ -40,7 +40,7 @@ const Product = (props) => {
                             <p className="product-name">{item.name}</p>
                             <p className="product-price">{item.new_price.toLocaleString()}</p>
                             <p className="product-price-sign">تومان مقدار:</p>                          
-                            <input className="product-amount-txb" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)} maxlength="3"/>
+                            <input className="product-amount-txb" type="number" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)} maxlength="3"/>
                             <p className="product-kilo">کیلو</p>
                           </div>
                       </div>
@@ -66,7 +66,7 @@ const Product = (props) => {
                                 <p className="product-name">{item.name}</p>
                                 <p className="product-price">{item.new_price.toLocaleString()}</p>
                                 <p className="product-price-sign">تومان مقدار:</p>                          
-                                <input className="product-amount-txb" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)} maxlength="3"/>
+                                <input className="product-amount-txb" type="number" defaultValue={0} onChange={(e) => addToCart(item._id, e.target.value)} maxlength="3"/>
                                 <p className="product-kilo">کیلو</p>
                               </div>
                           </div>

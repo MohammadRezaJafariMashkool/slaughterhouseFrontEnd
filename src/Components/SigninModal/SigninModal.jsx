@@ -12,6 +12,8 @@ const SigninModal = () => {
   const [tel, setTel] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -82,6 +84,8 @@ const SigninModal = () => {
         localStorage.setItem('auth-token', responseData.token);
         localStorage.setItem('user-name', responseData.user.name);
         localStorage.setItem('user-address', responseData.user.address);
+        localStorage.setItem('user-postal-code', responseData.user.postalCode);
+        localStorage.setItem('user-city', responseData.user.city);
         localStorage.setItem('user-tel', responseData.user.tel);
         localStorage.setItem('user-email', responseData.user.email);
         localStorage.setItem('user-role', responseData.user.role);
@@ -95,7 +99,7 @@ const SigninModal = () => {
   };
 
   const signup = async () => {
-    const formData = { name, tel, email, address, password, confirmPassword };
+    const formData = { name, tel, email, address, city, postalCode, password, confirmPassword };
     let responseData;
     try {
       const response = await fetch(`${BackendUrl}/register`, {
@@ -112,6 +116,8 @@ const SigninModal = () => {
         localStorage.setItem('auth-token', responseData.token);
         localStorage.setItem('user-name', responseData.user.name);
         localStorage.setItem('user-address', responseData.user.address);
+        localStorage.setItem('user-city', responseData.user.city);
+        localStorage.setItem('user-postal-code', responseData.user.postalCode);
         localStorage.setItem('user-tel', responseData.user.tel);
         localStorage.setItem('user-email', responseData.user.email);
         localStorage.setItem('user-role', responseData.user.role);
@@ -179,6 +185,20 @@ const SigninModal = () => {
               onChange={(e) => setAddress(e.target.value)}
               maxLength="300"
               rows="3"
+            />
+            <input
+              className="signinup-input"
+              type="text"
+              placeholder="نام شهر: "
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <input
+              className="signinup-input"
+              type="text"
+              placeholder="کد پستی: "
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
             />
             <input
               className="signinup-input"

@@ -3,14 +3,72 @@ import { BackendUrl, ImagesUrl } from '../../Constants/userConstants';
 import './AdminListProduct.css'
 import enabledIcon from'../../Assets/Green-Circle.png'
 import disabledIcon from'../../Assets/Red-Circle.png'
-import placeholder from'../../Assets/Placeholder.png'
 import {ShopContext} from '../../Context/ShopContext';
 
 const ListProduct = () => {
 
-  const {AllProducts, cartItems, addToCart, removeFromCart, getTotalCartAmount} = useContext(ShopContext)  
-  const authToken = localStorage.getItem('auth-token'); // Retrieve auth token
-  const userRole = localStorage.getItem('user-role'); // Retrieve auth token
+  // Handel Changes in the products
+  const { AllProductsAdmin, setAllProductsAdmin } = useContext(ShopContext);
+  const handleInputChange = (id, field, value) => {
+    const updatedProducts = AllProductsAdmin.map((product) =>
+      product._id === id
+        ? { ...product, [field]: value }
+        : product
+    );
+    setAllProductsAdmin(updatedProducts);
+  };
+  const handleEnableDisableProduct = (id, field, value) => {
+    const updatedProducts = AllProductsAdmin.map((product) =>
+      product._id === id
+        ? { ...product, [field]: value }
+        : product
+    );
+    setAllProductsAdmin(updatedProducts);
+  };
+
+  // Send changed product to the server
+  const sendChangesToServer = async (_id)=>{
+
+    try {
+    const foundProduct = AllProductsAdmin.find((p) => p._id === _id);
+
+    if (foundProduct.stock < 0 || foundProduct.new_price < 0) {alert('مقدار مبلغ و موجودی محصول نمیتواند عدد منفی باشد.');return;}
+    if (userRole !== "admin") {alert('شما ادمین نیستید.');return;}
+
+      const editedProductData = {
+        name:foundProduct.name,
+        new_price:foundProduct.new_price,
+        stock:foundProduct.stock,
+        price:foundProduct.price,
+        enable:foundProduct.enable,
+        category:foundProduct.category,
+        image:foundProduct.image,
+      };
+
+      const response = await fetch(BackendUrl+"/admin/product/"+_id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + authToken,
+        },
+        body: JSON.stringify(editedProductData),
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        alert('محصول با موفقیت ,ویرایش شد!');
+      } else {
+        alert('خطایی رخ داده است: ' + responseData.message);
+      }
+    } catch (error) {
+      alert('خطایی در ارسال محصول رخ داده است.');
+    }
+  }
+  
+  // Retrieve authentication token and user role
+  const authToken = localStorage.getItem('auth-token'); 
+  const userRole = localStorage.getItem('user-role'); 
 
   // Add product section states
   const[addProductVisibility, setAddProductVisibility] = useState("none");
@@ -46,7 +104,6 @@ const ListProduct = () => {
       alert('شما باید وارد حساب کاربری خود شوید.');
       return;
     }
-
     if (newProductName === '' || newProductImage.length === 0) {
       alert('لطفاً نام و یک تصویر را وارد کنید.');
       return;
@@ -63,14 +120,11 @@ const ListProduct = () => {
       for (let i = 0; i < newProductImage.length; i++) {
         formData.append('files', newProductImage[i]); // Add image files
       }
-
       const uploadResponse = await fetch(`${BackendUrl}/upload`, {
         method: 'POST',
         body: formData,
       });
-
       const uploadData = await uploadResponse.json();
-
       if (!uploadData.success) {
         alert('خطا در آپلود تصاویر: ' + uploadData.message);
         return;
@@ -84,7 +138,7 @@ const ListProduct = () => {
       const stock = newProductAmount; 
       const category = newProductCategory;
       // Step 2: Submit the ad with uploaded image URLs
-      const adData = {
+      const newProductData = {
         name,
         new_price,
         stock,
@@ -93,13 +147,13 @@ const ListProduct = () => {
         image: uploadedImageUrls, // Send the URLs as a string
       };
 
-      const response = await fetch(`${BackendUrl}/admin/product/new`, {
+      const response = await fetch(BackendUrl+"/admin/product/new", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + authToken,
         },
-        body: JSON.stringify(adData),
+        body: JSON.stringify(newProductData),
       });
 
       const responseData = await response.json();
@@ -122,10 +176,12 @@ const ListProduct = () => {
 
   return (
     <div className="products-manager-container" id="productprice">
+      {/* Header Button -------------------------------------------------------------------- */}
         <div className="btns-row">
           <div className="btn-addproduct" onClick={showOrHideAddProductDiv}><p>{addProductBtnTxt}</p></div>
-          <div className="btn-savechanges"><p>ذخیره تغییرات</p></div>
         </div>
+
+      {/* Add New Product Section -------------------------------------------------------------------- */}
         <div className="add-new-product-container" style={{display:addProductVisibility}}>
             <label>نام محصول</label>
             <input type="text" value={newProductName} onChange={(e)=>{setNewProductName(e.target.value)}}/>
@@ -144,6 +200,8 @@ const ListProduct = () => {
             <input id="file-upload-new-product" type="file" onChange={handleFileChange} className="file-upload-input"/>
             <button className="adinputbtn" onClick={addNewProduct}>ذخیره محصول</button>
         </div>
+
+      {/* Products List Section -------------------------------------------------------------------- */}
         <div className="admin-products-list-container">
           {/* Cow Products Table */}
           <div className="products-list-small-card">
@@ -151,16 +209,31 @@ const ListProduct = () => {
               <p>گوشت گوساله</p>
             </div>
               <div className="prices-table-body">
-                {AllProducts.map((item, i)=>{
+                {AllProductsAdmin.map((item, i)=>{
                   if(item.category === "Cow"){
-                    return <div  className="prices-item-container">
-                              <div key={i} className="prices-item">
-                                <img className="product-img" src={ImagesUrl+item.image} alt="" />
-                                <p className="product-name">{item.name}</p>
-                                <input className="product-amount-txb" type="number" defaultValue={item.new_price}/>
-                                <p className="product-price-sign">تومان مقدار:</p>                           
-                                <input className="product-amount-txb" type="number" defaultValue={item.stock}/>
-                                <p className="product-kilo">کیلو</p>
+                    return <div  className="admin-prices-item-container">
+                              <div key={i} className="admin-prices-item">
+                                <img className="admin-product-img" src={ImagesUrl+item.image} alt="" />
+                                <p className="admin-product-name">{item.name}</p>
+                                <input 
+                                  className="admin-product-amount-txb" 
+                                  type="number" 
+                                  value={item.new_price} 
+                                  onChange={(e) => handleInputChange(item._id, 'new_price', e.target.value)}
+                                  />
+                                <p className="admin-product-price-sign">تومان موجودی:</p>                           
+                                <input className="admin-product-amount-txb" 
+                                  type="number" 
+                                  value={item.stock} 
+                                  onChange={(e) => handleInputChange(item._id, 'stock', e.target.value)}
+                                  />
+                                <p className="admin-product-kilo">کیلو</p>
+                                <img className='admin-enabeld-icon' 
+                                  src={item.enable === "enabled"? enabledIcon : disabledIcon}  
+                                  onClick={(e) => handleEnableDisableProduct(item._id, 'enable', item.enable === "enabled"? "disabled" : "enabled")} 
+                                  alt='Enable/Disable product butten'
+                                  />
+                                <div className="btn-savechanges" onClick={()=>{sendChangesToServer(item._id)}}><p>ذخیره</p></div>
                               </div>   
                           </div>
                   }
@@ -176,17 +249,32 @@ const ListProduct = () => {
               <p>گوشت گوسفند</p>
             </div>
             <div className="prices-table-body">
-              {AllProducts.map((item, i)=>{
+              {AllProductsAdmin.map((item, i)=>{
                     if(item.category === "Sheep"){
-                      return <div  className="prices-item-container">
-                                <div key={i} className="prices-item">
-                                  <img className="product-img" src={ImagesUrl+item.image} alt="" />
-                                  <p className="product-name">{item.name}</p>
-                                <input className="product-amount-txb" type="number" defaultValue={item.new_price}/>
-                                <p className="product-price-sign">تومان مقدار:</p>                           
-                                <input className="product-amount-txb" type="number" defaultValue={item.stock}/>
-                                  <p className="product-kilo">کیلو</p>
-                                </div>
+                      return <div  className="admin-prices-item-container">
+                              <div key={i} className="admin-prices-item">
+                                <img className="admin-product-img" src={ImagesUrl+item.image} alt="" />
+                                <p className="admin-product-name">{item.name}</p>
+                                <input 
+                                  className="admin-product-amount-txb" 
+                                  type="number" 
+                                  value={item.new_price} 
+                                  onChange={(e) => handleInputChange(item._id, 'new_price', e.target.value)}
+                                  />
+                                <p className="admin-product-price-sign">تومان موجودی:</p>                           
+                                <input className="admin-product-amount-txb" 
+                                  type="number" 
+                                  value={item.stock} 
+                                  onChange={(e) => handleInputChange(item._id, 'stock', e.target.value)}
+                                  />
+                                <p className="admin-product-kilo">کیلو</p>
+                                <img className='admin-enabeld-icon' 
+                                  src={item.enable === "enabled"? enabledIcon : disabledIcon}  
+                                  onClick={(e) => handleEnableDisableProduct(item._id, 'enable', item.enable === "enabled"? "disabled" : "enabled")} 
+                                  alt='Enable/Disable product butten'
+                                  />
+                                <div className="btn-savechanges" onClick={()=>{sendChangesToServer(item._id)}}><p>ذخیره</p></div>
+                              </div>   
                             </div>
                     }
                     else{

@@ -15,15 +15,18 @@ const getDefaultCart = ()=>{
 const ShopContextProvider = (props)=>{
 
     const [AllProducts, setAllProducts] = useState([]);
+    const [AllProductsAdmin, setAllProductsAdmin] = useState([]);
+    const [usersList, setUsersList] = useState([]);
+    const [ordersList, setOrdersList] = useState([]);
     const [AllAds, setAllAds] = useState([]);
     const [allSchedules, setAllSchedules] = useState([]);
     const [loading, setLoading] = useState(true);
     const[cartItems, setCartItems] = useState(getDefaultCart())
 
 
-
+    // get products
     useEffect(() => {
-        fetch(BackendUrl+'/allproducts')
+        fetch(BackendUrl+'/products')
             .then((response) => response.json())
             .then((data) => {
                 setAllProducts(data.products);
@@ -35,6 +38,96 @@ const ShopContextProvider = (props)=>{
             });
     }, []);
 
+    // get all products
+    useEffect(() => {
+        if(localStorage.getItem('user-role')==='admin'){
+            fetch(BackendUrl+'/admin/allproducts', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setAllProductsAdmin(data.products);
+                    setLoading(false); // Set loading to false when data is loaded
+                })
+                .catch((error) => {
+                    console.error('Error fetching data:', error);
+                    setLoading(false); // Set loading to false in case of an error
+                });
+        }
+    }, []);
+
+    // get users list
+    useEffect(() => {
+        console.log(localStorage.getItem('user-role'))
+        if(localStorage.getItem('user-role')==='admin'){
+            fetch(BackendUrl+'/admin/users', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUsersList(data.products);
+                    setLoading(false); // Set loading to false when data is loaded
+                })
+                .catch((error) => {
+                    console.error('Error fetching data:', error);
+                    setLoading(false); // Set loading to false in case of an error
+                });
+        }
+    }, []);
+
+    // get orders list
+    useEffect(() => {
+        
+        // Admin User's Orders list
+        if(localStorage.getItem('user-role')==='admin'){
+            fetch(BackendUrl+'/admin/users', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUsersList(data.products);
+                    setLoading(false); // Set loading to false when data is loaded
+                })
+                .catch((error) => {
+                    console.error('Error fetching data:', error);
+                    setLoading(false); // Set loading to false in case of an error
+                });
+        }
+
+        // Normal User's Orders list
+        else{
+            fetch(BackendUrl+'/admin/users', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUsersList(data.products);
+                    setLoading(false); // Set loading to false when data is loaded
+                })
+                .catch((error) => {
+                    console.error('Error fetching data:', error);
+                    setLoading(false); // Set loading to false in case of an error
+                });
+        }
+    }, []);
+
+    // get adds
     useEffect(() => {
         fetch(BackendUrl+'/allads')
             .then((response) => response.json())
@@ -61,6 +154,7 @@ const ShopContextProvider = (props)=>{
     const removeFromCart = (itemId)=>{
         setCartItems((prev)=>({...prev, [itemId]:prev[itemId]-1}))
     }
+    const clearCart = () => {setCartItems({});}    
     const getTotalCartAmount = ()=>{
          let totalAmount = 0;
          for(const item in cartItems){
@@ -80,7 +174,7 @@ const ShopContextProvider = (props)=>{
         }
        return totalItems;
     }    
-    const contextValue = {allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalCartItems};    
+    const contextValue = {AllProductsAdmin, setAllProductsAdmin, allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, clearCart, getTotalCartAmount, getTotalCartItems};    
     if (loading) {
         return <div>Loading...</div>;
     }

@@ -58,6 +58,48 @@
     width: 94%;
     overflow-y: auto;
 }
+.admin-prices-item-container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    border-bottom: 1px solid black;
+    width: 100%;
+
+}
+.admin-prices-item{    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 13%;
+    gap: 3%;
+}
+.admin-product-img{ 
+    width: 50px;
+    height: 50px;
+}
+.admin-product-name{
+    font-size: 16px;
+    font-weight: 500;
+    width: 180px;
+}
+.admin-product-price{
+    direction: ltr;
+    font-size: 16px;
+    font-weight: 800;
+    width: 200px;
+}
+.admin-product-price-sign{
+    font-size: 16px;
+    font-weight: 500;
+    width: 110px;
+}
+.admin-product-amount-txb{
+    width: 60px;
+}
+.admin-enabeld-icon{height: 35px;width: 35px;}
+.admin-enabeld-icon:hover{border: 2px solid gray;}
 
 @media(max-width:800px){
 }
@@ -67,5 +109,47 @@
         width: 100%;
         gap: 20px;
         overflow-y: scroll;
+    }  
+    .admin-prices-item{    
+        display: grid;
+        /*grid-template-columns: 3 1fr; /* 2 columns of equal width */
+        gap: 2px; /* Spacing between the boxes */
+
+        grid-template-columns: 1fr 2.5fr 1fr 1fr 1fr 0.2fr; /* 3 columns */
+        grid-template-rows: auto 1fr auto; /* Rows with dynamic height */
+
+        max-width: 100%; /* Optional: Control the total width */
+        width: 100%;
+        padding: 2px;
+    }
+    .admin-product-img{ 
+        width: 50px;
+        height: 50px;
+    }
+    .admin-product-name{
+        font-size: 16px;
+        font-weight: 500;
+        width: 75%;
+    }
+    .admin-product-price{
+        direction: ltr;
+        font-size: 16px;
+        font-weight: 800;
+        width: 95%;
+    }
+    .admin-product-price-sign{
+        font-size: 16px;
+        font-weight: 500;
+        width: 70%;
+    }
+    .admin-product-amount-txb{
+        width: 30px;
+    }
+    .admin-product-kilo{
+        width: 60px;
+    }
+    .admin-prices-item p{
+        font-size: 13px;
+        font-weight: 800;
     }
 }
