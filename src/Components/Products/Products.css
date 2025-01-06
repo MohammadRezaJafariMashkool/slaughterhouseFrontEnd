@@ -56,7 +56,8 @@
 .prices-table-body{
     background: white;
     width: 100%;
-    height: 100%;
+    height: 358px;
+    overflow-y: scroll;
 }
 .prices-item-container{
     display: flex;

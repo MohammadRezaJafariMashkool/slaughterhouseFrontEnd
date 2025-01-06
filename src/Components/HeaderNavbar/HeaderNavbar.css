@@ -107,8 +107,8 @@ a {
     margin-right: 10px;
     height: 95%;
 }
-
-  
+.username-logout{display: flex;flex-direction: row; align-items: center; justify-content: center;}
+.username-logout img{width: 30px; height: 30px;}
 @media (max-width:1380px){    
     .header-site-icon{
         width: 15%;

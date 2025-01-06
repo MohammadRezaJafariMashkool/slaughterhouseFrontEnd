@@ -8,7 +8,13 @@ const CartModal = () => {
   const {AllProducts, cartItems, addToCart, removeFromCart, getTotalCartAmount, clearCart} = useContext(ShopContext)
 
 // Retrieve auth token
-  const authToken = localStorage.getItem('auth-token'); 
+  //const [authToken] = useState(localStorage.getItem('auth-token')); 
+  const [userNameState, setUserNameState]= useState(localStorage.getItem('user-name')); 
+  const [addressState, setAddressState]= useState(localStorage.getItem('user-address')); 
+  const defAddressState = useState(localStorage.getItem('user-address')); 
+  const [postalCodeState, setPostalCodeState] = useState(localStorage.getItem('user-postal-code')); 
+  const [telState , setTelState] = useState( localStorage.getItem('user-tel')); 
+  const [cityState , setCityState] = useState( localStorage.getItem('user-city')); 
 
   // State for modal visibility
   const [isModalOpen, setIsModalOpen] = useState(true); 
@@ -18,15 +24,10 @@ const CartModal = () => {
 
   // Checout
   const checkOut = async ()=>{
-      if (!authToken) {
-        alert('شما باید وارد حساب کاربری خود شوید.');
-        return;
-      }
-  
-      if (getTotalCartAmount === 0) {
-        alert('سبد خرید شما خالیست.');
-        return;
-      }
+    // You Should Login Error
+      if (!userNameState) {alert('شما باید وارد حساب کاربری خود شوید.');return;}
+    // Empty Cart Error
+      if (getTotalCartAmount === 0) {alert('سبد خرید شما خالیست.');return;}
 
       const cardProductsList = {
         orderItems: AllProducts.filter(item => cartItems[item._id] > 0).map(item => ({
@@ -37,10 +38,10 @@ const CartModal = () => {
           product: item._id,
         })),
         shippingInfo: {
-          address: localStorage.getItem('user-address'),
-          city: localStorage.getItem('user-city'),
-          tel: localStorage.getItem('user-tel'),
-          postalCode: localStorage.getItem('user-postal-code'),
+          address: addressState,
+          city: cityState,
+          tel: telState,
+          postalCode: postalCodeState,
           country: "Iran",
         },
         paymentInfo: {
@@ -61,10 +62,10 @@ const CartModal = () => {
 
         const response = await fetch(`${BackendUrl}/order/new`, {
           method: 'POST',
+          credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + authToken,
-          },
+              'Content-Type': 'application/json',
+           },
           body: jsonPayload,
         });
   
@@ -74,6 +75,7 @@ const CartModal = () => {
           clearCart();
           alert('سفارش با موفقیت ثبت شد!');
         } else {
+          console.log(responseData);
           alert('خطایی رخ داده است: ' + responseData.message);
         }
       } catch (error) {
@@ -91,6 +93,7 @@ const CartModal = () => {
       <div className="cartmodal-overlay" onClick={closeModal}></div>
       <div className="cartmodal-content">
         <h2>سبد خرید</h2>
+        {/* Products Row */}
         <div className="products-list-container" id="productprice">
         
           {/* Cow Products Table */}
@@ -147,9 +150,38 @@ const CartModal = () => {
         
         </div>
 
-        {/* Total */}
-        <div className="total-container">
-          <p>مبلغ کل: {getTotalCartAmount().toLocaleString()} تومان</p><div className="checkout-btn" onClick={checkOut}>تسویه حساب</div>
+        {/* Shipping info Row */}
+        <div className="shipping-total-row-container">
+
+          {/* Shipping */}
+          <div className="shipping-container">
+                  <div className="shipping-header"><h2>مشخصات محل تحویل</h2></div>
+                  <lable className="shipping-item">نام گیرنده:</lable>
+                  <input type="text"  className="shipping-item" value={userNameState} onChange={(e)=>{setUserNameState(e.target.value)}}/>
+                  <lable className="shipping-item">تلفن تحویل گیرنده: </lable>
+                  <input type="phone number" className="shipping-item" value={telState} onChange={(e)=>{setTelState(e.target.value)}}/>
+                  <lable className="shipping-item">آدرس: </lable>
+                  <textarea type="address" className="shipping-item" value={addressState} 
+                    onChange={(e)=>{
+                          if(e.target.value !== defAddressState){
+                            setAddressState(e.target.value);
+                            setCityState("");
+                            setPostalCodeState("");
+                          }}}/>
+                  <lable className="shipping-item">شهر:</lable>
+                  <input type="text" className="shipping-item" value={cityState} onChange={(e)=>{setCityState(e.target.value)}}/>
+                  <lable className="shipping-item">کدپستی:</lable>
+                  <input type="postalcode" className="shipping-item" value={postalCodeState} onChange={(e)=>{setPostalCodeState(e.target.value)}}/>
+          </div>
+
+          {/* Total */}
+          <div className="total-container">
+            <div className="total-header"><h2>تسویه حساب</h2></div>
+            <div className='flxrow total-item'><p>مالیات: {"0".toLocaleString()} تومان</p></div>
+            <div className='flxrow total-item'><p>هزینه ارسال: {"0".toLocaleString()} تومان</p></div>
+            <div className='flxrow total-item'><p>کد تخفیف: {"0".toLocaleString()} تومان</p></div>
+            <div className='flxrow total-item'><p>مبلغ کل: {getTotalCartAmount().toLocaleString()} تومان</p><div className="checkout-btn" onClick={checkOut}>تسویه حساب</div></div>
+          </div>
         </div>
 
         <span className="modal-close-btn" onClick={closeModal}>

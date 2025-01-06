@@ -5,72 +5,13 @@ import moment from 'moment-jalaali';
 
 const ListProduct = ({updateState}) => {
 
-  // kicks unadmin user out ;)
-  updateState('admin')
-
   
   const [ordersList, setOrdersList] = useState([])
   
   
 
 
-// Get All Orders 
-useEffect(() => {
-  const getAllOrders = async()=>{
-    let responseData;
-      await fetch(BackendUrl+'/admin/orders',{
-        method:'GET',
-        credentials: 'include',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('auth-token'),
-        }
-      }).then((response)=> response.json()).then((data)=>responseData = data)
-  
-      if(!responseData.success){    
-        alert("خطا!!");     
-      }
-      else{
-        setOrdersList(responseData.orders)
-      }
-    };
-    // Call the function when the component mounts
-    getAllOrders();
-  }, []);
 
-  // Shows order's details
-  const orderDetails = async(orderItems)=>{
-    let details = ""; // Initialize details as an empty string
-
-    orderItems.forEach(item => {
-        details += "نام محصول: " + item.name + " | قیمت: " + item.price + " | تعداد: " + item.quantity + "\n";
-    });
-
-    alert("جزئیات سفارش: \n"+details);
-  }
-
-  // Shows user's details
-  const userDetails = async(user)=>{
-    let userDetailsInAString = "جزئیات کاربر: \n"+JSON.stringify(user);
-
-    userDetailsInAString = userDetailsInAString.replace('{"_id":"', "\nآیدی: "); 
-    userDetailsInAString = userDetailsInAString.replace('","name":"', "\nنام: "); 
-    userDetailsInAString = userDetailsInAString.replace('","email":"', "\nایمیل: "); 
-    userDetailsInAString = userDetailsInAString.replace('","tel":"', "\nتلفن: "); 
-    userDetailsInAString = userDetailsInAString.replace('","address":"', "\nآدرس: "); 
-    userDetailsInAString = userDetailsInAString.replace('"}', ""); 
-
-    alert(userDetailsInAString);
-  }
-  // Shows payment details
-  const paymentDetails = async(paymentInfo)=>{
-    let paymentDetailsInAString = "جزئیات سفارش: \n"+JSON.stringify(paymentInfo);
-
-    paymentDetailsInAString = paymentDetailsInAString.replace('{"id":"', "آیدی: "); 
-    paymentDetailsInAString = paymentDetailsInAString.replace('","status":"succeeded"}', "\n وضعیت این پرداخت: موفق"); 
-
-    alert(paymentDetailsInAString);
-  }
 
   //Handle the persian name of element
   const orderStatus = {
@@ -127,21 +68,6 @@ const saveChanges = async (id)=>{
             <div className="orders-list-container">        
             {ordersList.map((e) => {
                     return <div className="user-orders-list-table-item">
-                          <p onClick={()=>{orderDetails(e.orderItems)}}>{e._id}</p>
-                          <p>{moment(e.createdAt).format('jYYYY/jMM/0')}</p>
-                          <p onClick={()=>{paymentDetails(e.paymentInfo)}}>{e.totalPrice.toLocaleString()+" تومان"}</p>
-                          <p onClick={()=>{userDetails(e.user)}}>{e.user.name}</p>
-                          <div className="div-order-status">
-                              <select style={style(e.orderStatus)} name="status" id={e._id+"select"} defaultValue={e.orderStatus}>
-                                <option style={{background: '#80ed99'}} value="Delivered">تحویل شد</option>
-                                <option style={{background: '#ffd166'}} value="Processing">درحال انجام</option>
-                                <option style={{background: '#ffa5ab'}} value="Canceled">کنسل شده</option>
-                              </select>
-                          </div>
-                          <div className="div-order-notes">
-                            <input type="text" id={e._id+"notes"} value={e.orderNotes}/>
-                            <button onClick={()=>{saveChanges(e._id)}}>ذخیره</button>
-                          </div>
                         </div>
             })}
             </div>  

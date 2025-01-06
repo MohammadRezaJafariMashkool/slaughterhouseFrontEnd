@@ -13,6 +13,8 @@ import PriceIcon from '../../Assets/Icons/PriceIconDark.png';
 import OffersIcon from '../../Assets/OffersIcon.png';
 import CartIcon from '../../Assets/Icons/ShopingCardDrak.png';
 import UserIcon from '../../Assets/Icons/UserIconDrak.png';
+import logOutIcon from '../../Assets/Icons/logout.png';
+import { BackendUrl } from '../../Constants/userConstants';
 
 const HeaderNavbar = ({ onToggleCartModal, onToggleProfileModal, onToggleSignInModal, onToggleSignUpModal, onToggleOrderModal }) => {
   // State for selected navigation button
@@ -22,9 +24,43 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleProfileModal, onToggleSignInM
   const { getTotalCartItems } = useContext(ShopContext);
 
   // Handle navigation button click
-  const handleButtonClick = (buttonName) => {
-    setSelectedButton(buttonName);
-  };
+  const handleButtonClick = (buttonName) => {setSelectedButton(buttonName);};
+
+// Log out
+const logOut = async () => {
+  try {
+      const response = await fetch(`${BackendUrl}/logout`, {
+          method: 'POST', // Change to POST if required, though GET may suffice with current backend
+          credentials: 'include', // Ensures cookies are sent with the request
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.success) {
+          // Clear local storage
+          localStorage.removeItem('user-name');
+          localStorage.removeItem('user-address');
+          localStorage.removeItem('user-postal-code');
+          localStorage.removeItem('user-city');
+          localStorage.removeItem('user-tel');
+          localStorage.removeItem('user-email');
+          localStorage.removeItem('user-role');
+
+          // Redirect to the homepage
+          window.location.replace('/');
+      } else {
+          alert("Failed to log out. Please try again.");
+      }
+  } catch (error) {
+      console.error("Logout error:", error);
+      alert("An error occurred. Please try again.");
+  }
+};
+
+
 
   return (
     <div className="header">
@@ -87,7 +123,11 @@ const HeaderNavbar = ({ onToggleCartModal, onToggleProfileModal, onToggleSignInM
 
           <div className="nav-button" onClick={localStorage.getItem('user-name')?onToggleProfileModal:onToggleSignInModal}>
             <img src={UserIcon} alt="" />
-            <p>{localStorage.getItem('user-name')?localStorage.getItem('user-name'):"ورود/ثبتنام"}</p>
+            {localStorage.getItem('user-name')
+                ?<div className="username-logout">
+                  <p>{localStorage.getItem('user-name')}</p>
+                  <img src={logOutIcon} alt='logout' onClick={logOut}/></div>
+                :<p>ورود/ثبتنام</p>}
           </div>
         </div>
       </div>

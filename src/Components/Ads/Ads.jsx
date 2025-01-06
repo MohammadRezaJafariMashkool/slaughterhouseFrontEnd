@@ -39,7 +39,7 @@ const Ads = () => {
             <img src={BackendUrl+item.image || PlaceHolder} alt="" className="adpic" />
             <div className="addetails">
               <div className="add-card-header">
-                <h4>{item.description.substring(0, 50)}</h4>
+                <h4>{item.description.substring(0, 30)}</h4>
               </div>
               <div className="add-card-body">
                 <p>{item.description}</p>

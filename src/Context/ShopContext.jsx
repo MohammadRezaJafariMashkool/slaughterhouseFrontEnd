@@ -38,15 +38,15 @@ const ShopContextProvider = (props)=>{
             });
     }, []);
 
-    // get all products
+    // get all products Admin
     useEffect(() => {
         if(localStorage.getItem('user-role')==='admin'){
             fetch(BackendUrl+'/admin/allproducts', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include', // Ensure cookies are included in the request/response
             })
                 .then((response) => response.json())
                 .then((data) => {
@@ -62,18 +62,17 @@ const ShopContextProvider = (props)=>{
 
     // get users list
     useEffect(() => {
-        console.log(localStorage.getItem('user-role'))
         if(localStorage.getItem('user-role')==='admin'){
             fetch(BackendUrl+'/admin/users', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include', // Ensure cookies are included in the request/response
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    setUsersList(data.products);
+                    setUsersList(data.users);
                     setLoading(false); // Set loading to false when data is loaded
                 })
                 .catch((error) => {
@@ -88,16 +87,16 @@ const ShopContextProvider = (props)=>{
         
         // Admin User's Orders list
         if(localStorage.getItem('user-role')==='admin'){
-            fetch(BackendUrl+'/admin/users', {
+            fetch(BackendUrl+'/admin/orders', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include', // Ensure cookies are included in the request/response
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    setUsersList(data.products);
+                    setOrdersList(data.orders);
                     setLoading(false); // Set loading to false when data is loaded
                 })
                 .catch((error) => {
@@ -108,16 +107,16 @@ const ShopContextProvider = (props)=>{
 
         // Normal User's Orders list
         else{
-            fetch(BackendUrl+'/admin/users', {
+            fetch(BackendUrl+'/orders', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include', // Ensure cookies are included in the request/response
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    setUsersList(data.products);
+                    setOrdersList(data.products);
                     setLoading(false); // Set loading to false when data is loaded
                 })
                 .catch((error) => {
@@ -129,16 +128,46 @@ const ShopContextProvider = (props)=>{
 
     // get adds
     useEffect(() => {
-        fetch(BackendUrl+'/allads')
-            .then((response) => response.json())
-            .then((data) => {
-                setAllAds(data.ads);
-                setLoading(false); // Set loading to false when data is loaded
+
+        // Admin User's Orders list
+        if(localStorage.getItem('user-role')==='admin'){
+            fetch(BackendUrl+'/admin/allads', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include', // Ensure cookies are included in the request/response
             })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-                setLoading(false); // Set loading to false in case of an error
-            });
+                .then((response) => response.json())
+                .then((data) => {
+                    setAllAds(data.orders);
+                    setLoading(false); // Set loading to false when data is loaded
+                })
+                .catch((error) => {
+                    console.error('Error fetching data:', error);
+                    setLoading(false); // Set loading to false in case of an error
+                });
+        }
+
+        // Normal User's Orders list
+        else{
+            fetch(BackendUrl+'/ads', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include', // Ensure cookies are included in the request/response
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setAllAds(data.products);
+                    setLoading(false); // Set loading to false when data is loaded
+                })
+                .catch((error) => {
+                    console.error('Error fetching data:', error);
+                    setLoading(false); // Set loading to false in case of an error
+                });
+        }
     }, []);
 
     const addToCart = (itemId, quantity = 1) => {
@@ -174,7 +203,7 @@ const ShopContextProvider = (props)=>{
         }
        return totalItems;
     }    
-    const contextValue = {AllProductsAdmin, setAllProductsAdmin, allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, clearCart, getTotalCartAmount, getTotalCartItems};    
+    const contextValue = {AllProductsAdmin, usersList, ordersList, setAllProductsAdmin, allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, clearCart, getTotalCartAmount, getTotalCartItems};    
     if (loading) {
         return <div>Loading...</div>;
     }

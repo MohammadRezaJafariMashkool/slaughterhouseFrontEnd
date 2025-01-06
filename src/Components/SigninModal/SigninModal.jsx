@@ -76,12 +76,13 @@ const SigninModal = () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Ensure cookies are included in the request/response
         body: JSON.stringify(formData),
       });
       responseData = await response.json();
 
       if (responseData.success) {
-        localStorage.setItem('auth-token', responseData.token);
+        //localStorage.setItem('auth-token', responseData.token);
         localStorage.setItem('user-name', responseData.user.name);
         localStorage.setItem('user-address', responseData.user.address);
         localStorage.setItem('user-postal-code', responseData.user.postalCode);
@@ -108,12 +109,13 @@ const SigninModal = () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Ensure cookies are included in the request/response
         body: JSON.stringify(formData),
       });
       responseData = await response.json();
 
       if (responseData.success) {
-        localStorage.setItem('auth-token', responseData.token);
+        //localStorage.setItem('auth-token', responseData.token);
         localStorage.setItem('user-name', responseData.user.name);
         localStorage.setItem('user-address', responseData.user.address);
         localStorage.setItem('user-city', responseData.user.city);
@@ -125,7 +127,7 @@ const SigninModal = () => {
       } else if (responseData.error && responseData.error.code === 11000) {
         alert("شما قبلا ثبتنام کرده اید لطفا اگر رمز خود را فراموش کرده اید از گزینه فراموشی رمز عبور استفاده کنید!");
       } else {
-        alert(responseData.errMessage || "خطایی رخ داده لطفا دوباره تلاش کنید.");
+        alert("111"+responseData.errMessage || "خطایی رخ داده لطفا دوباره تلاش کنید.");
       }
     } catch (error) {
       alert("خطایی رخ داده لطفا دوباره تلاش کنید.");

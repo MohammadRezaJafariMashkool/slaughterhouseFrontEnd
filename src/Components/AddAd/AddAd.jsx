@@ -3,14 +3,14 @@ import './AddAd.css';
 import { BackendUrl } from '../../Constants/userConstants';
 
 const AddAd = ({ onToggleSignInModal }) => {
-  const authToken = localStorage.getItem('auth-token'); // Retrieve auth token
+  const userName = localStorage.getItem('user-name'); // Retrieve auth token
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
 
   const addNewAd = async () => {
-    if (!authToken) {
-      alert('شما باید وارد حساب کاربری خود شوید.');
-      onToggleSignInModal();
+    if (!userName) {
+      //alert('شما باید وارد حساب کاربری خود شوید.');
+      alert(userName);
       return;
     }
 
@@ -52,8 +52,8 @@ const AddAd = ({ onToggleSignInModal }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + authToken,
         },
+        credentials: 'include', // Ensure cookies are included in the request/response
         body: JSON.stringify(adData),
       });
 
@@ -92,7 +92,7 @@ const AddAd = ({ onToggleSignInModal }) => {
                 انتخاب تصویر
             </label>
             <input id="file-upload" type="file" onChange={(e) => setImages(Array.from(e.target.files))} className="file-upload-input"/>
-            <button className="adinputbtn" onClick={authToken ? addNewAd : onToggleSignInModal}>
+            <button className="adinputbtn" onClick={addNewAd}>
             ثبت آگهی
           </button>
           </div>
