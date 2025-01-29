@@ -21,25 +21,25 @@ const Navbar = ({setBodyState }) => {
           <div style={{textDecoration:"none", curson: "pointer"}} onClick={() => handleStateChange("products")}>
               <div className="sidebar-item">
                   <img src={list_product_icon} alt="" />
-                  <p>لیست محصولات</p>
+                  <p>محصولات</p>
               </div>
           </div>
           <div style={{textDecoration:"none", curson: "pointer"}} onClick={() => handleStateChange("orders")}>
               <div className="sidebar-item">
                   <img src={add_product_icon} alt="" />
-                  <p>لیست سفارشات</p>
+                  <p>سفارشات</p>
               </div>
           </div>
           <div style={{textDecoration:"none", curson: "pointer"}} onClick={() => handleStateChange("users")}>
               <div className="sidebar-item">
                   <img src={list_product_icon} alt="" />
-                  <p>لیست کاربران</p>
+                  <p>کاربران</p>
               </div>
           </div>
           <div style={{textDecoration:"none", curson: "pointer"}} onClick={() => handleStateChange("ads")}>
               <div className="sidebar-item">
                   <img src={list_product_icon} alt="" />
-                  <p>لیست آگهی ها</p>
+                  <p>آگهی ها</p>
               </div>
           </div>
       </div>

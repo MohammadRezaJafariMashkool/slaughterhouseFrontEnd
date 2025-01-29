@@ -50,6 +50,7 @@ const ShopContextProvider = (props)=>{
             })
                 .then((response) => response.json())
                 .then((data) => {
+                    console.log(data.products)
                     setAllProductsAdmin(data.products);
                     setLoading(false); // Set loading to false when data is loaded
                 })
@@ -60,8 +61,8 @@ const ShopContextProvider = (props)=>{
         }
     }, []);
 
-    // get users list
-    useEffect(() => {
+    // get users list admin
+    useEffect(() => { 
         if(localStorage.getItem('user-role')==='admin'){
             fetch(BackendUrl+'/admin/users', {
                 method: 'POST',
@@ -106,7 +107,7 @@ const ShopContextProvider = (props)=>{
         }
 
         // Normal User's Orders list
-        else{
+        else if(localStorage.getItem('user-role')){
             fetch(BackendUrl+'/orders', {
                 method: 'POST',
                 headers: {
@@ -129,7 +130,7 @@ const ShopContextProvider = (props)=>{
     // get adds
     useEffect(() => {
 
-        // Admin User's Orders list
+        // Admin User's ads list
         if(localStorage.getItem('user-role')==='admin'){
             fetch(BackendUrl+'/admin/allads', {
                 method: 'POST',
@@ -149,8 +150,8 @@ const ShopContextProvider = (props)=>{
                 });
         }
 
-        // Normal User's Orders list
-        else{
+        // Normal User's ads list
+        else if(localStorage.getItem('user-role')){
             fetch(BackendUrl+'/ads', {
                 method: 'POST',
                 headers: {
@@ -203,7 +204,7 @@ const ShopContextProvider = (props)=>{
         }
        return totalItems;
     }    
-    const contextValue = {AllProductsAdmin, usersList, ordersList, setAllProductsAdmin, allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, clearCart, getTotalCartAmount, getTotalCartItems};    
+    const contextValue = {AllProductsAdmin, usersList, ordersList, setOrdersList, setAllProductsAdmin, allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, clearCart, getTotalCartAmount, getTotalCartItems};    
     if (loading) {
         return <div>Loading...</div>;
     }

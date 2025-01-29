@@ -49,8 +49,8 @@ const ListProduct = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + authToken,
         },
+        credentials: 'include', // Ensure cookies are included in the request/response
         body: JSON.stringify(editedProductData),
       });
 

@@ -75,9 +75,23 @@
         max-width: none;
         height: auto;
         justify-content: center;
+        gap: 5px;
     }
     .sidebar-item{
-        padding-left: 20px;
+        width: auto;
+        justify-content: center;
+        align-items: center;
         margin: 0;
+        padding: 8px;
+    } 
+    .sidebar-item img{
+        display: none;
+    }
+    
+    .adminnavbar-user-profile-container{
+        margin: auto;
+    }
+    .adminnavbar-user-profile-container p{
+        font-size: 12px;
     }
 }
