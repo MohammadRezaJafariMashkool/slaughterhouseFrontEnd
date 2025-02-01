@@ -50,7 +50,6 @@ const ShopContextProvider = (props)=>{
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data.products)
                     setAllProductsAdmin(data.products);
                     setLoading(false); // Set loading to false when data is loaded
                 })
@@ -141,7 +140,8 @@ const ShopContextProvider = (props)=>{
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    setAllAds(data.orders);
+                    setAllAds(data.ads);
+                    console.log("ads"+data.ads)
                     setLoading(false); // Set loading to false when data is loaded
                 })
                 .catch((error) => {
@@ -161,7 +161,7 @@ const ShopContextProvider = (props)=>{
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    setAllAds(data.products);
+                    setAllAds(data.ads);
                     setLoading(false); // Set loading to false when data is loaded
                 })
                 .catch((error) => {
@@ -204,7 +204,7 @@ const ShopContextProvider = (props)=>{
         }
        return totalItems;
     }    
-    const contextValue = {AllProductsAdmin, usersList, ordersList, setOrdersList, setAllProductsAdmin, allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, clearCart, getTotalCartAmount, getTotalCartItems};    
+    const contextValue = {AllProductsAdmin, usersList, ordersList, setOrdersList, AllAds, setAllAds, setAllProductsAdmin, allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, clearCart, getTotalCartAmount, getTotalCartItems};    
     if (loading) {
         return <div>Loading...</div>;
     }

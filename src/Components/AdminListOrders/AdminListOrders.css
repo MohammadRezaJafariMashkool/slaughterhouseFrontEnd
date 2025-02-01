@@ -197,23 +197,16 @@
 
 }
 @media(max-width:800px){
-.user-orders-list-table-item{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-}
-@media(max-width:500px){
-
-.user-section{
-    flex-direction: column;
-    gap: 20px;
-}
-.user-details{    
-    width: 100%;
-}
-.user-change-pass{
-    width: 100%;
-}
+    .order-item-row{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .order-item-details{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }
