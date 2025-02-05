@@ -21,7 +21,7 @@
     margin-top: 20px;
     border-radius: 8px;
 }
-.additem{
+.adsitem{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -31,7 +31,7 @@
     border: 1px solid #281713;
     cursor: pointer;
 }
-.add-card-header{
+.ads-card-header{
   background: #fefefe;
   height: 14%;
   width: 100%;
@@ -40,22 +40,24 @@
   align-items: center;
   padding: 5px;
 }
-.add-card-header h4{overflow: hidden;}
-.add-card-body{
+.ads-card-header h4{overflow: hidden;}
+.ads-card-body{
   width: 100%;
   height: 86%;
-  padding: 10px;
-  padding-left: 200px;
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
   overflow-y:  hidden;
 }
-.add-card-body p{
+.ads-card-body p{
   width: 90%;
     text-align: justify;
 }
 .adpic{
-    width: 45%;    
+    width: 45%;  
+    height: 100%;  
 }
-.addetails{
+.adsdetails{
     display: flex;
     flex-direction: column;
     direction: rtl;
@@ -156,7 +158,7 @@
     .adslist{
       grid-template-columns: 1fr;
     }
-    .add-card-body p{
+    .ads-card-body p{
       width: 90%;
     }
     
@@ -173,8 +175,13 @@
     border: 3px solid #888;
     border-radius: 8px;
   }
-
-.adpic{
-  width: 90%;    
+.adsitem{
+  flex-direction: column;
+  height: auto;
 }
+.adsdetails{width: 100%;}
+.ads-card-header{padding: 0;}
+.ads-card-header h4{font-size: 13px;}
+.ads-card-body p{font-size: 13px;}
+.adpic{width: 100%;}    
 }

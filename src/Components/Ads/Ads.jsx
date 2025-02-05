@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ShopContext } from '../../Context/ShopContext';
 import PlaceHolder from '../../Assets/Placeholder.png'
 import './Ads.css';
-import { BackendUrl } from '../../Constants/userConstants';
+import { ImagesUrl } from '../../Constants/userConstants';
 
 const Ads = () => {
   
@@ -35,13 +35,13 @@ const Ads = () => {
       <h1 className='ads-title' id="ads">آگهی های اخیر:</h1>
       <div className="adslist">
         {AllAds.map((item, i) => (
-          <div className="additem" key={i} onClick={() => openModal(item)}>
-            <img src={BackendUrl+item.image || PlaceHolder} alt="" className="adpic" />
-            <div className="addetails">
-              <div className="add-card-header">
-                <h4>{item.description.substring(0, 30)}</h4>
+          <div className="adsitem" key={i} onClick={() => openModal(item)}>
+            <img src={ImagesUrl+item.image || PlaceHolder} alt="" className="adpic" />
+            <div className="adsdetails">
+              <div className="ads-card-header">
+                <h4>{item.description.substring(0, 20)}</h4>
               </div>
-              <div className="add-card-body">
+              <div className="ads-card-body">
                 <p>{item.description}</p>
               </div>
             </div>
@@ -60,7 +60,7 @@ const Ads = () => {
               <div className="ads-modal-content">
                 <div className="ads-modal-item-image-container">
                   <img
-                    src={BackendUrl+selectedAd.image || PlaceHolder}
+                    src={ImagesUrl+selectedAd.image || PlaceHolder}
                     alt={selectedAd.title}
                     className="adpic"
                   />
