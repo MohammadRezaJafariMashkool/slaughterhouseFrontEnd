@@ -24,6 +24,7 @@ function App() {
   const toggleSignInModal = () => setIsSignInModalOpen((prev) => !prev);
   const toggleProfileModal = () => setIsProfileModalOpen((prev) => !prev);
 
+  // Commetnts
   
   
   return (

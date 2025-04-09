@@ -21,7 +21,7 @@ const ShopContextProvider = (props)=>{
     const [AllAds, setAllAds] = useState([]);
     const [allSchedules, setAllSchedules] = useState([]);
     const [loading, setLoading] = useState(true);
-    const[cartItems, setCartItems] = useState(getDefaultCart())
+    const[cartItems, setCartItems] = useState(getDefaultCart());
 
 
     // get products
@@ -204,7 +204,9 @@ const ShopContextProvider = (props)=>{
         }
        return totalItems;
     }    
-    const contextValue = {AllProductsAdmin, usersList, ordersList, setOrdersList, AllAds, setAllAds, setAllProductsAdmin, allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, clearCart, getTotalCartAmount, getTotalCartItems};    
+    const contextValue = {AllProductsAdmin, usersList, ordersList, setOrdersList, AllAds, setAllAds, 
+        setAllProductsAdmin, allSchedules, AllAds, AllProducts, cartItems, addToCart, removeFromCart, 
+        clearCart, getTotalCartAmount, getTotalCartItems};    
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -212,8 +214,7 @@ const ShopContextProvider = (props)=>{
         <ShopContext.Provider value={contextValue}>
             {props.children}
         </ShopContext.Provider>
-    )
-    
+    )    
 }
 
 export default ShopContextProvider;
